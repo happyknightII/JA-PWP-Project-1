@@ -9,7 +9,7 @@ class Robot:
     start = duration * 0.2
     basetime = time()
     deltatime = 0
-    #slow start 
+    #slow start
     while deltatime < start:
       self.motors[0].setPower(power[0] * deltatime / start, brake)
       self.motors[1].setPower(power[1] * deltatime / start, brake)
@@ -24,6 +24,3 @@ class Robot:
       self.motors[0].setPower(power[0] - power[0] * deltatime / start, brake)
       self.motors[1].setPower(power[1] - power[1] * deltatime / start, brake)
       deltatime = time() - basetime
-
-  def pause(self, time1):
-    sleep(time1)

@@ -35,4 +35,10 @@ class Motor:
       else:
         self.pins[0].ChangeDutyCycle(0)
         self.pins[1].ChangeDutyCycle(-power)
-        
+
+  def __del__(self):
+    self.pins[0].ChangeDutyCycle(0)
+    self.pins[1].ChangeDutyCycle(0)
+    self.pins[0].stop()
+    self.pins[1].stop()
+    self.enable(False)

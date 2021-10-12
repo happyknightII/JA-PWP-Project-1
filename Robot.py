@@ -1,9 +1,9 @@
-.from Motor import Motor
+from Motor import Motor
 from time import time, sleep
 import RPi.GPIO as IO
 
 class Robot:
-  def __init__(self, *, leftPins = (14, 15, 24), rightPins = (17, 27, 23)):
+  def __init__(self, leftPins = (14, 15, 24), rightPins = (17, 27, 23)):
     self.motors = (Motor((leftPins[0],leftPins[1]), leftPins[2]), Motor((rightPins[0], rightPins[1]), rightPins[2]))
 
   def drive(self, power, duration, brake=False):

@@ -1,0 +1,8 @@
+https://circuitdigest.com/microcontroller-projects/raspberry-pi-pwm-tutorial
+https://acoptex.com/project/167/basics-project-033b-l298n-dual-h-bridge-motor-driver-module-one-or-two-dc-motors-9v12v-at-lex-c/
+new password: bruhmoment
+
+mA[0].ChangeDutyCycle(50)     PWM
+IO.output(ena1, IO.HIGH) Digital
+
+ip address: 192.168.1.200

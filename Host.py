@@ -26,7 +26,7 @@ def add():
 	except:
 		return "value parameter should be a number"
 	if command =="Maze":
-		maze(Robot).maze()
+		maze(Robot)
 	elif command == "Forward":
 		forward(robot, value)
 	elif command == "Turn":

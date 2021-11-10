@@ -1,7 +1,4 @@
 from flask import Flask, request
-from Move.Forward import forward
-from Move.Turn import turn
-from Move.Maze import maze
 from Robot import Robot
 
 app = Flask(__name__)
@@ -10,12 +7,12 @@ robot = Robot()
 
 @app.route('/')
 def myapp():
-  message = "To use this app: %s/add?command=___&value=___" % request.base_url
+  message = "To use this app: %s/control?command=___&value=___ \n Commands: Forward (positive value forwards, negative backwards, Turn(positive turn to the left, negative turn to the right, or Auto(put in any number to run)" % request.base_url
   return message
 
 
-@app.route('/add')
-def add():
+@app.route('/control')
+def control():
   # Checking that both parameters have been supplied
   if 'command' in request.args:
     if not 'value' in request.args:
@@ -26,17 +23,17 @@ def add():
   # Make sure they are numbers too
   command = str(request.args['command'])
   
-  if command == "Maze":
-    maze(Robot)
+  if command == "Auto":
+    robot.auto()
   else:
     try:
       value = float(request.args['value'])
     except:
       return "value parameter should be a number"
     if command == "Forward":
-      forward(robot, value)
+      robot.forward(value)
     elif command == "Turn":
-      turn(robot, value)
+      robot.turn(value)
     else:
-      return "Invalid Command: Try using 'Maze', 'Forward', or 'Turn'"
+      return "Invalid Command: Try using 'Auto', 'Forward', or 'Turn'"
   return command + " " + str(value)

@@ -7,20 +7,17 @@ robot = Robot()
 
 @app.route('/')
 def myapp():
-  message = "To use this app: %s/control?command=___&value=___ \n Commands: Forward (positive value forwards, negative backwards, Turn(positive turn to the left, negative turn to the right, or Auto(put in any number to run)" % request.base_url
+  message = "To use this app: http://192.168.1.200:5000//control?command=___&value=___      Commands: Forward (positive value forwards, negative backwards, Turn(positive turn to the left, negative turn to the right, or Auto(put in 0 to run)" % request.base_url
+
   return message
 
 
 @app.route('/control')
 def control():
-  # Checking that both parameters have been supplied
-  if 'command' in request.args:
-    if not 'value' in request.args:
-      return "value parameter is missing"
-  else:
-    return "2"
+  # Checking that command parameter has been supplied
+  if 'command' not in request.args:
+    return "Try using 'Auto', 'Forward', or 'Turn'"
 
-  # Make sure they are numbers too
   command = str(request.args['command'])
   
   if command == "Auto":

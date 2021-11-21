@@ -7,7 +7,7 @@ import RPi.GPIO as IO
 LEFT_PINS = (14, 15, 24)
 RIGHT_PINS = (17, 27, 23)
 x = 0.4 
-y = -1.85
+y = -1.3
 class Robot:
   def __init__(self, leftPins=LEFT_PINS, rightPins=RIGHT_PINS):
     self.motors = (Motor((leftPins[0], leftPins[1]), leftPins[2]), Motor((rightPins[0], rightPins[1]), rightPins[2]))
@@ -39,13 +39,13 @@ class Robot:
 
   def forward(self, feet):
     if feet > 0:
-      self.drive((74.46+x, 68.2+y), 0.75 * feet)
+      self.drive((74.46+x, 68.2+y), feet)
     elif feet < 0:
-      self.drive((-64, -68.2), 1 * -feet)
+      self.drive((-64, -68.2), -feet)
 
   def turn(self, degrees):
     if degrees > 0:
-      self.drive((50+x, 0), 1.33 * degrees/90)
+      self.drive((45+x, 0), 1.33 * degrees/90)
     elif degrees < 0:
       self.drive((0, 43.74+y), 1.33 * -degrees/90)
 

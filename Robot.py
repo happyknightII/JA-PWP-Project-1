@@ -37,11 +37,11 @@ class Robot:
     self.motors[0].setPower(0)
     self.motors[1].setPower(0)
 
-  def forward(self, feet):
-    if feet > 0:
-      self.drive((74.46+x, 68.2+y), feet)
-    elif feet < 0:
-      self.drive((-64, -68.2), -feet)
+  def forward(self, sec):
+    if sec > 0:
+      self.drive((74.46+x, 68.2+y), sec)
+    elif sec < 0:
+      self.drive((-64, -68.2), -sec)
 
   def turn(self, degrees):
     if degrees > 0:

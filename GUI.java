@@ -10,9 +10,10 @@ import javax.swing.text.PlainDocument;
 
 public class GUI {
   static JLabel commandLabel;
+  static IntegerDocument valueDocument;
   //Http client setup
   private static void createAndShowGUI() {
-    Color backgroundColor = new Color(0,0,0);
+    Color backgroundColor = new Color(0, 0, 0);
     //Create and set up the window
     JFrame window = new JFrame("Robot App");
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,29 +25,26 @@ public class GUI {
     mainPanelLayout.setVgap(10);
     mainPanel.setLayout(mainPanelLayout);
     mainPanel.setBackground(backgroundColor);
-    mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
-		//Empty cell
-    mainPanel.add(Box.createGlue());
+    mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
     //value container
-    IntegerDocument valueDocument = new IntegerDocument(5);
+    valueDocument = new IntegerDocument(5);
 
     //Command Label
-    //JPanel commandLabelPanel = new JPanel();
-    //commandLabelPanel.setLayout(new GridLayout(1,1));
-    //commandLabelPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-    //commandLabelPanel.setBackground(backgroundColor);
-    //commandLabel = new JLabel();
-    //commandLabel.setText("Command Here");
-    //commandLabel.setForeground(new Color(255,255,255));
-    //commandLabelPanel.add(commandLabel);
-    //mainPanel.add(commandLabelPanel);
+    JPanel commandLabelPanel = new JPanel();
+    commandLabelPanel.setLayout(new GridLayout(1,1));
+    commandLabelPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    commandLabelPanel.setBackground(backgroundColor);
+    commandLabel = new JLabel();
+    commandLabel.setText("Command Here");
+    commandLabel.setForeground(new Color(255,255,255));
+    commandLabelPanel.add(commandLabel);
+    mainPanel.add(commandLabelPanel);
 
 		//Forward Button
     JButton forwardButton = new JButton("Forward");
-    forwardButton.addActionListener(e -> sendGet(String.format("http://192.168.1.200:5000/control?command=Forward&value=%d", valueDocument.getValue())));
-    forwardButton.setBackground(new Color(255, 255, 0));
+    forwardButton.addActionListener(e -> sendCommand("Forward", valueDocument.getValue()));
+    forwardButton.setBackground(new Color(255, 255, 255));
     mainPanel.add(forwardButton);
 
     //Empty cell
@@ -54,8 +52,8 @@ public class GUI {
 
 		//Left Button
     JButton leftButton = new JButton("Left");
-    leftButton.addActionListener(e -> sendGet(String.format("http://192.168.1.200:5000/control?command=Turn&value=-%d", valueDocument.getValue())));
-    leftButton.setBackground(new Color(255, 255, 0));
+    leftButton.addActionListener(e -> sendCommand("Turn", -valueDocument.getValue()));
+    leftButton.setBackground(new Color(255, 255, 255));
     mainPanel.add(leftButton);
 
 		//value textbox
@@ -69,8 +67,8 @@ public class GUI {
 
 		//Right Button
     JButton rightButton = new JButton("Right");
-    rightButton.addActionListener(e -> sendGet(String.format("http://192.168.1.200:5000/control?command=Turn&value=%d", valueDocument.getValue())));
-    rightButton.setBackground(new Color(255, 255, 0));
+    rightButton.addActionListener(e -> sendCommand("Turn", valueDocument.getValue()));
+    rightButton.setBackground(new Color(255, 255, 255));
     mainPanel.add(rightButton);
 
     //Empty cell
@@ -78,18 +76,18 @@ public class GUI {
 
 		//Backward Button
     JButton backwardButton = new JButton("Backward");
-    backwardButton.addActionListener(e -> sendGet(String.format("http://192.168.1.200:5000/control?command=Forward&value=-%d", valueDocument.getValue())));
-    backwardButton.setBackground(new Color(255, 255, 0));
+    backwardButton.addActionListener(e -> sendCommand("Forward", -valueDocument.getValue()));
+    backwardButton.setBackground(new Color(255, 255, 255));
     mainPanel.add(backwardButton);
 
     //Auto Button
     JPanel autoPanel = new JPanel();
-    autoPanel.setLayout(new GridLayout(1,1));
+    autoPanel.setLayout(new GridLayout(1, 1));
     autoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
     autoPanel.setBackground(backgroundColor);
     JButton autoButton = new JButton("Auto");
-    autoButton.addActionListener(e -> sendGet(String.format("http://192.168.1.200:5000/control?command=Auto")));
-    autoButton.setBackground(new Color(255, 255, 0));
+    autoButton.addActionListener(e -> sendCommand("Auto", 0));
+    autoButton.setBackground(new Color(255, 255, 255));
     autoPanel.add(autoButton);
     mainPanel.add(autoPanel);
 
@@ -108,7 +106,7 @@ public class GUI {
     this.limit = limit;
     }
 
-    public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+    public void insertString(int offset, String  str, AttributeSet attr ) throws BadLocationException {
       if (str == null) return;
 
       if ((getLength() + str.length()) <= limit) {
@@ -119,7 +117,11 @@ public class GUI {
         }
       }
     }
+    
     public int getValue() {
+      if (super.getLength() == 0) {
+        return 0;
+      }
       try {
         return Integer.parseInt(super.getText(0, super.getLength()));
       } catch(Exception e){
@@ -129,15 +131,22 @@ public class GUI {
       }
     }
   }
+  
+  private static void sendCommand(String command, int value){
+      if (command.equals("Auto")) {
+        commandLabel.setText("<html><p>Running Auto</p></html>");
+        sendGet("http://192.168.1.200:5000/control?command=Auto");
+      } else {
+        commandLabel.setText(String.format("<html><p>Running %s: %d</p></html>", command, value));
+        sendGet(String.format("http://192.168.1.200:5000/control?command=%s&value=%d", command, value));
+      }
+  }
 
   private static void sendGet(String url){
-
     try {
       URL m_url = new URL(url);
-            HttpURLConnection httpConnection = (HttpURLConnection) m_url.openConnection();
-						System.out.println(url);
+      HttpURLConnection httpConnection = (HttpURLConnection) m_url.openConnection();
       httpConnection.getResponseCode();
-      commandLabel.setText(url);
     } catch (IOException e) {
       System.out.println("SendGet Failed to execute");
       System.out.println(e);

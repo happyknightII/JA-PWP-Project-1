@@ -44,13 +44,13 @@ def control():
 
     if command == "Auto":
         robot.auto()
-    elif command == "Light":
-        try:
-            r = int(request.args['R'])
-            g = int(request.args['G'])
-            b = int(request.args['B'])
-        except:
-            return "dude stop it"
+    #elif command == "Light":
+        #try:
+            #r = int(request.args['R'])
+            #g = int(request.args['G'])
+            #b = int(request.args['B'])
+        #except:
+            #return "dude stop it"
         #robot.LEDStrip.colorWiple((r, g, b))
 
     else:

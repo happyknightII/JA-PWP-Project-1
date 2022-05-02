@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 
 robot = Robot()
 
-framerate = 15
+framerate = 1
 camera = PiCamera(framerate=framerate)
 class Logger:
     def __init__(self, *files):

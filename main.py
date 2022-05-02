@@ -45,11 +45,11 @@ def streamer():
             buffer.seek(0)
             buffer.flush()
 
-            array = np.asarray(bytearray(buffer.read()), dtype=np.uint8)
-            image = cv2.imdecode(array, cv2.IMREAD_COLOR)
-            cv2.circle(image, (100, 100), 100, (255, 255, 255), -1)
-
-            image_bytes = cv2.imencode('.jpg', image)[1].tobytes()
+            # array = np.asarray(bytearray(buffer.read()), dtype=np.uint8)
+            # image = cv2.imdecode(array, cv2.IMREAD_COLOR)
+            # cv2.circle(image, (100, 100), 100, (255, 255, 255), -1)
+            #
+            # image_bytes = cv2.imencode('.jpg', image)[1].tobytes()
 
             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.read() + b'\r\n')
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")

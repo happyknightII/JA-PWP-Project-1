@@ -51,7 +51,7 @@ def streamer():
 
             image_bytes = cv2.imencode('.jpg', image)[1].tobytes()
 
-            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.read() + b'\r\n')
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 

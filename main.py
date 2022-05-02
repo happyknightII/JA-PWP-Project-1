@@ -1,18 +1,15 @@
 import io
 import sys
-import numpy as np
-import cv2
+
 from picamera import PiCamera
 from flask import Flask, Response, render_template, request
+import cv2
 
 from Robot import Robot
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 robot = Robot()
-
-framerate = 1
-camera = PiCamera(framerate=framerate)
 class Logger:
     def __init__(self, *files):
         self.files = files
@@ -40,36 +37,14 @@ def home():
 @app.route('/stream')
 def streamer():
     def stream():
+        framerate = 15
         buffer = io.BytesIO()
-        for frame in camera.capture_continuous(buffer, 'jpeg', use_video_port=True):
-            buffer.seek(0)
-            buffer.flush()
-
-            array = np.asarray(bytearray(buffer.getvalue()), dtype=np.uint8)
-            image = cv2.imdecode(array, cv2.IMREAD_COLOR)
-            cv2.circle(image, (100, 100), 100, (255, 255, 255), -1)
-
-            image_bytes = cv2.imencode('.jpg', image)[1].tobytes()
-
-            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
+        with PiCamera(framerate=framerate) as camera:
+            for frame in camera.capture_continuous(buffer, 'jpeg', use_video_port=True):
+                buffer.seek(0)
+                buffer.flush()
+                yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
-
-
-# @app.route('/opencv')
-# def opencv():
-#     def stream():
-#         buffer = io.BytesIO()
-#         for frame in camera.capture_continuous(buffer, 'jpeg', use_video_port=True):
-#             buffer.seek(0)
-#             buffer.flush()
-#
-#             array = np.asarray(bytearray(buffer.read()), dtype=np.uint8)
-#             image = cv2.imdecode(array, cv2.IMREAD_COLOR)
-#
-#             image_bytes = cv2.imencode('.jpg', image)[1].tobytes()
-#
-#             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + image_bytes + b'\r\n')
-#     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
 @app.route('/logpage')

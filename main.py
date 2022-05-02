@@ -4,6 +4,7 @@ import sys
 from picamera import PiCamera
 from flask import Flask, Response, render_template, request
 import cv2
+import numpy as np
 
 from Robot import Robot
 
@@ -42,7 +43,7 @@ def streamer():
         with PiCamera(framerate=framerate) as camera:
             for frame in camera.capture_continuous(buffer, 'jpeg', use_video_port=True):
                 buffer.seek(0)
-                buffer.flush()
+
                 yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
 

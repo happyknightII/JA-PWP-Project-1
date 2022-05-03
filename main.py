@@ -101,7 +101,7 @@ def annotation():
                                             font, 0.5, (0, 255, 0))
                         i = i + 1
                 cv2.drawContours(canvas, [approx], -1, (0, 0, 255), 2, cv2.LINE_AA)
-                frame = cv2.imencode('.jpg', img)[1].tobytes()
+                frame = cv2.imencode('.jpg', canvas)[1].tobytes()
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
             else:

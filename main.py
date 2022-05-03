@@ -39,9 +39,7 @@ def home():
 @app.route('/stream')
 def streamer():
     def stream():
-        framerate = 15
         camera = cv2.VideoCapture(0)
-        buffer = io.BytesIO()
         while True:
             ret, img = camera.read()
             if ret:

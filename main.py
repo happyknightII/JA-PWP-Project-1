@@ -47,7 +47,7 @@ def streamer():
             if ret:
                 frame = cv2.imencode('.jpg', img)[1].tobytes()
                 yield (b'--frame\r\n'
-                       b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
             else:
                 break
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")

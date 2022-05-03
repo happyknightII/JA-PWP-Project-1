@@ -10,6 +10,7 @@ from Robot import Robot
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 robot = Robot()
+piCamera = cv2.VideoCapture(0)
 
 
 class Logger:
@@ -38,8 +39,7 @@ def home():
 
 @app.route('/stream')
 def streamer():
-    def stream():
-        camera = cv2.VideoCapture(0)
+    def stream(camera):
         while True:
             ret, img = camera.read()
             if ret:
@@ -48,7 +48,22 @@ def streamer():
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
             else:
                 break
-    return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
+    return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
+@app.route('/annotation')
+def streamer():
+    def stream(camera):
+        while True:
+            ret, img = camera.read()
+            if ret:
+                cv2.circle(img, (100, 100), 100, (255, 255, 255), -1)
+                frame = cv2.imencode('.jpg', img)[1].tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            else:
+                break
+    return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
 @app.route('/logpage')

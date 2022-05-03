@@ -52,7 +52,7 @@ def streamer():
 
 
 @app.route('/annotation')
-def streamer():
+def annotation():
     def stream(camera):
         while True:
             ret, img = camera.read()

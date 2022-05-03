@@ -58,50 +58,11 @@ def annotation():
         while True:
             ret, img = camera.read()
             if ret:
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-                endpoints = []
-                ret, threshed = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)
-                # find contours without approx
-                cnts = cv2.findContours(threshed, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)[-2]
-
-                # get the max-area contour
-                cnt = sorted(cnts, key=cv2.contourArea)[-1]
-
-                # calc arclength
-                arclen = cv2.arcLength(cnt, True)
-
-                # do approx
-                eps = 0.0005
-                epsilon = arclen * eps
-                approx = cv2.approxPolyDP(cnt, epsilon, True)
-
-                # draw the result
-                canvas = img.copy()
-
-                for pt in approx:
-                    cv2.circle(canvas, (pt[0][0], pt[0][1]), 7, (0, 255, 0), -1)
-                    i = 0
-                    n = approx.ravel()
-                    for j in n:
-                        if i % 2 == 0:
-                            x = n[i]
-                            y = n[i + 1]
-
-                            # String containing the co-ordinates.
-                            string = str(x) + " " + str(y)
-                            if i == 0:
-                                # text on topmost co-ordinate.
-                                cv2.putText(canvas, "Arrow tip", (x, y),
-                                            font, 1.0, (255, 0, 0))
-                                endpoints.extend([x, y])
-                            else:
-                                # text on remaining co-ordinates.
-                                cv2.putText(canvas, string, (x, y),
-                                            font, 0.5, (0, 255, 0))
-                        i = i + 1
-                cv2.drawContours(canvas, [approx], -1, (0, 0, 255), 2, cv2.LINE_AA)
-                frame = cv2.imencode('.jpg', canvas)[1].tobytes()
+                row = img[100]
+                for index in range(row):
+                    if row[index][0] > 200:
+                        cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
+                frame = cv2.imencode('.jpg', img)[1].tobytes()
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
             else:

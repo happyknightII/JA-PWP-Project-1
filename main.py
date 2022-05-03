@@ -59,7 +59,7 @@ def annotation():
             ret, img = camera.read()
             if ret:
                 row = img[100]
-                for index in range(row):
+                for index in range(img.shape[0]):
                     if row[index][0] > 200:
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
                 frame = cv2.imencode('.jpg', img)[1].tobytes()

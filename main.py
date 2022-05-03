@@ -45,6 +45,7 @@ def streamer():
                 buffer.seek(0)
 
                 yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
+                buffer.flush()
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 

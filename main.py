@@ -39,13 +39,16 @@ def home():
 def streamer():
     def stream():
         framerate = 15
+        camera = cv2.VideoCapture(0)
         buffer = io.BytesIO()
-        with PiCamera(framerate=framerate) as camera:
-            for frame in camera.capture_continuous(buffer, 'jpeg', use_video_port=True):
-                buffer.seek(0)
-
-                yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
-                buffer.flush()
+        while True:
+            ret, img = camera.read()
+            if ret:
+                frame = cv2.imencode('.jpg', img)[1].tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + buffer.getvalue() + b'\r\n')
+            else:
+                break
     return Response(stream(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 

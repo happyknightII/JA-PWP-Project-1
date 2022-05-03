@@ -1,7 +1,6 @@
 import io
 import sys
 
-from picamera import PiCamera
 from flask import Flask, Response, render_template, request
 import cv2
 import numpy as np
@@ -11,6 +10,8 @@ from Robot import Robot
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 robot = Robot()
+
+
 class Logger:
     def __init__(self, *files):
         self.files = files

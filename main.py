@@ -71,6 +71,27 @@ def annotation():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
+@app.route('/tuning')
+def tuning():
+    def stream(camera):
+        while True:
+            ret, img = camera.read()
+            if ret:
+                average = np.average(img[int(img.shape[0]/2) - 15:int(img.shape[0]/2 + 15), int(img.shape[1]/2) - 15:int(img.shape[1]/2) + 15])
+
+                cv2.line(img, (int(img.shape[0]/2), 0), (int(img.shape[0]/2), int(img.shape[1])), (255, 255, 255), 5)
+                cv2.line(img, (0, int(img.shape[1]/2)), (int(img.shape[0]), int(img.shape[1]/2)), (255, 255, 255), 5)
+                cv2.circle(img, (), (255, 255, 255), 20, 5)
+                cv2.putText(img, f"average", (100, 100), cv2.FONT_HERSHEY_COMPLEX,  10, (255, 255, 255), 2)
+                
+                frame = cv2.imencode('.jpg', img)[1].tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            else:
+                break
+    return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
 @app.route('/logpage')
 def log_page():
     def gen():

@@ -77,7 +77,9 @@ def tuning():
         while True:
             ret, img = camera.read()
             if ret:
-                average = np.average(img[int(img.shape[0]/2) - 15:int(img.shape[0]/2 + 15), int(img.shape[1]/2) - 15:int(img.shape[1]/2) + 15])
+                cropped_image =img[int(img.shape[0]/2) - 15:int(img.shape[0]/2 + 15), int(img.shape[1]/2) - 15:int(img.shape[1]/2) + 15]
+                hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
+                average = np.average(hsv, axis=(0, 1))
 
                 cv2.line(img, (int(img.shape[1]/2), 0), (int(img.shape[1]/2), int(img.shape[0])), (255, 255, 255), 1)
                 cv2.line(img, (0, int(img.shape[0]/2)), (int(img.shape[1]), int(img.shape[0]/2)), (255, 255, 255), 1)

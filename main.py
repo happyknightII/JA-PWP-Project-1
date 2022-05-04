@@ -96,6 +96,25 @@ def tuning():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
+@app.route('/filter')
+def tuning():
+    def stream(camera):
+        while True:
+            ret, img = camera.read()
+            if ret:
+                hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+                HSV_MIN = np.array([90, 128, 64], np.uint8)
+                HSV_MAX = np.array([100, 158, 74], np.uint8)
+
+                frame_threshed = cv2.inRange(hsv, HSV_MIN, HSV_MAX)
+
+                frame = cv2.imencode('.jpg', frame_threshed)[1].tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            else:
+                break
+    return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
+
 @app.route('/logpage')
 def log_page():
     def gen():

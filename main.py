@@ -97,7 +97,7 @@ def tuning():
 
 
 @app.route('/filter')
-def tuning():
+def filter():
     def stream(camera):
         while True:
             ret, img = camera.read()

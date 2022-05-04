@@ -80,10 +80,12 @@ def tuning():
                 cropped_image =img[int(img.shape[0]/2) - 15:int(img.shape[0]/2 + 15), int(img.shape[1]/2) - 15:int(img.shape[1]/2) + 15]
                 hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
                 average = np.average(hsv, axis=(0, 1))
+                color = cv2.cvtColor(average, cv2.COLOR_HSV2BGR)
 
                 cv2.line(img, (int(img.shape[1]/2), 0), (int(img.shape[1]/2), int(img.shape[0])), (255, 255, 255), 1)
                 cv2.line(img, (0, int(img.shape[0]/2)), (int(img.shape[1]), int(img.shape[0]/2)), (255, 255, 255), 1)
                 cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 20, (255, 255, 255), 1)
+                cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 10, color, 1)
                 cv2.putText(img, f"{average}", (10, 200), cv2.FONT_HERSHEY_COMPLEX,  0.5, (255, 255, 255), 1)
 
                 frame = cv2.imencode('.jpg', img)[1].tobytes()

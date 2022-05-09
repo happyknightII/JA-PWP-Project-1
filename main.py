@@ -96,8 +96,8 @@ def tuning():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/filter')
-def filter():
+@app.route('/threshold')
+def threshold():
     def stream(camera):
         while True:
             ret, img = camera.read()
@@ -114,6 +114,7 @@ def filter():
             else:
                 break
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
+
 
 @app.route('/logpage')
 def log_page():

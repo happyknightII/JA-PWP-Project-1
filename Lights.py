@@ -26,7 +26,7 @@ def wheel(pos):
 
 class LightStrip(PixelStrip):
     def __init__(self, brightness=LED_BRIGHTNESS):
-        super.__init__(self, LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, brightness, LED_CHANNEL)
+        super(LightStrip, self).__init__(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, brightness, LED_CHANNEL)
         self.begin()
 
     # Define functions which animate LEDs in various ways.

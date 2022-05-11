@@ -62,6 +62,7 @@ def annotation():
                 for index in range(img.shape[0]):
                     if row[index][0] > 100:
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
+                        robot.indicate(10)
                         break
                 frame = cv2.imencode('.jpg', img)[1].tobytes()
                 yield (b'--frame\r\n'
@@ -87,7 +88,7 @@ def tuning():
                 cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 20, (255, 255, 255), 1)
                 cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 10, rgb_average, -1)
                 cv2.putText(img, f"{average}", (10, 200), cv2.FONT_HERSHEY_COMPLEX,  0.5, (255, 255, 255), 1)
-
+                robot.strip.turnOff()
                 frame = cv2.imencode('.jpg', img)[1].tobytes()
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')

@@ -12,6 +12,8 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 robot = Robot()
 piCamera = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_COMPLEX
+hsvThresholdLow = [90, 128, 64]
+hsvThresholdHigh = [100, 158, 74]
 
 
 class Logger:
@@ -109,8 +111,8 @@ def threshold():
             ret, img = camera.read()
             if ret:
                 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-                HSV_MIN = np.array([90, 128, 64], np.uint8)
-                HSV_MAX = np.array([100, 158, 74], np.uint8)
+                HSV_MIN = np.array(hsvThresholdLow, np.uint8)
+                HSV_MAX = np.array(hsvThresholdHigh, np.uint8)
 
                 frame_threshed = cv2.inRange(hsv, HSV_MIN, HSV_MAX)
 
@@ -129,6 +131,18 @@ def log_page():
         log_list = log.readlines()
         yield "<br>".join(log_list[-100:])
     return Response(gen())
+
+
+@app.route('/thresholdparameters')
+def control():
+    global hsvThresholdLow
+    global hsvThresholdHigh
+    if 'hh' not in request.args or 'vh' not in request.args or 'sh' not in request.args or 'hl' not in request.args or 'vl' not in request.args or 'sl' not in request.args:
+        return "missing arguments'"
+    hsvThresholdLow = [int(request.args['hl']), int(request.args['sl']), int(request.args['vl'])]
+    hsvThresholdHigh = [int(request.args['hh']), int(request.args['sh']), int(request.args['vh'])]
+
+    return "arguments saved"
 
 
 @app.route('/control')

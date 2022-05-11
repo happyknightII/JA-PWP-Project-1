@@ -41,4 +41,12 @@ $(function() {
             });
             return false;
           });
+          $('a#threshold').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/threshold?value=' + document.getElementById('distance').value,
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
         });

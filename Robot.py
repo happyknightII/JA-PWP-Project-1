@@ -56,9 +56,9 @@ class Robot:
     def indicate(self, index):
         for i in range(72):
             if i < index:
-                self.strip.setPixel(index, (i/index, i/index, i/index))
+                self.strip.setPixel(index, (int(i/index), int(i/index), int(i/index)))
             else:
-                self.strip.setPixel(index, ((index-i)/index, (index-i)/index, (index-i)/index))
+                self.strip.setPixel(index, (int((index-i)/index), int((index-i)/index), int((index-i)/index)))
         self.strip.show()
 
     def pause(self, time1):

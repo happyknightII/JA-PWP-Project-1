@@ -12,41 +12,42 @@ $(function() {
           $('a#forwardButton').on('click', function(e) {
             e.preventDefault()
             $.getJSON('/control?command=Forward&value=' + document.getElementById('distance').value,
-                function(data) {
-              //do nothing
-            });
+                function(data) {});
             return false;
           });
           $('a#leftButton').on('click', function(e) {
             e.preventDefault()
             $.getJSON('/control?command=Turn&value=-' + document.getElementById('distance').value,
-                function(data) {
-              //do nothing
-            });
+                function(data) {});
             return false;
           });
           $('a#rightButton').on('click', function(e) {
             e.preventDefault()
             $.getJSON('/control?command=Turn&value=' + document.getElementById('distance').value,
-                function(data) {
-              //do nothing
-            });
+                function(data) {});
             return false;
           });
           $('a#backwardButton').on('click', function(e) {
             e.preventDefault()
             $.getJSON('/control?command=Forward&value=-' + document.getElementById('distance').value,
-                function(data) {
-              //do nothing
-            });
+                function(data) {});
             return false;
           });
           $('a#threshold').on('click', function(e) {
             e.preventDefault()
-            $.getJSON('/threshold?value=' + document.getElementById('distance').value,
-                function(data) {
-              //do nothing
-            });
+            $.getJSON('/thresholdparameters?hh='
+            + document.getElementById('hh').value
+            + 'vh='
+            + document.getElementById('vh').value
+            + 'sh='
+            + document.getElementById('sh').value
+            + 'hl='
+            + document.getElementById('hl').value
+            + 'vl='
+            + document.getElementById('vl').value
+            + 'sl='
+            + document.getElementById('sl').value,
+                function(data) {});
             return false;
           });
         });

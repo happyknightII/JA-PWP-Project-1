@@ -100,7 +100,7 @@ def tuning():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/tuning/', methods=('GET', 'POST'))
+@app.route('/tuning/')
 def create():
     return render_template('tuning.html')
 

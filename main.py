@@ -134,7 +134,7 @@ def log_page():
     return Response(gen())
 
 
-@app.route('/thresholdparameters')
+@app.route('/tuning/thresholdparameters')
 def thresholdparameters():
     global hsvThresholdLow
     global hsvThresholdHigh

@@ -76,7 +76,7 @@ def annotation():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/getrgb')
+@app.route('/tuning/getrgb')
 def tuning():
     def stream(camera):
         while True:
@@ -100,12 +100,12 @@ def tuning():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/tuning/')
+@app.route('/tuning/', methods=('GET', 'POST'))
 def create():
     return render_template('tuning.html')
 
 
-@app.route('/threshold')
+@app.route('/tuning/threshold')
 def threshold():
     def stream(camera):
         while True:

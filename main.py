@@ -112,6 +112,7 @@ def threshold():
         lastTime = time.time()
         while True:
             if time.time() > 0.1 + lastTime:
+                lastTime = time.time()
                 ret, img = camera.read()
                 if ret:
                     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)

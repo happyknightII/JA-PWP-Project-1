@@ -4,6 +4,7 @@ import sys
 from flask import Flask, Response, render_template, request
 import cv2
 import numpy as np
+import time
 
 from Robot import Robot
 
@@ -108,20 +109,22 @@ def create():
 @app.route('/tuning/threshold')
 def threshold():
     def stream(camera):
+        lastTime = time.time()
         while True:
-            ret, img = camera.read()
-            if ret:
-                hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-                HSV_MIN = np.array(hsvThresholdLow, np.uint8)
-                HSV_MAX = np.array(hsvThresholdHigh, np.uint8)
+            if time.time() > 0.1 + lastTime:
+                ret, img = camera.read()
+                if ret:
+                    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+                    HSV_MIN = np.array(hsvThresholdLow, np.uint8)
+                    HSV_MAX = np.array(hsvThresholdHigh, np.uint8)
 
-                frame_threshed = cv2.inRange(hsv, HSV_MIN, HSV_MAX)
+                    frame_threshed = cv2.inRange(hsv, HSV_MIN, HSV_MAX)
 
-                frame = cv2.imencode('.jpg', frame_threshed)[1].tobytes()
-                yield (b'--frame\r\n'
-                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-            else:
-                break
+                    frame = cv2.imencode('.jpg', frame_threshed)[1].tobytes()
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                else:
+                    break
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 

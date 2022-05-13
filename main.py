@@ -13,8 +13,8 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 robot = Robot()
 piCamera = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_COMPLEX
-hsvThresholdLow = [110, 200, 255]
-hsvThresholdHigh = [80, 20, 30]
+hsvThresholdLow = [80, 20, 30]
+hsvThresholdHigh = [110, 200, 255]
 
 
 class Logger:
@@ -62,9 +62,12 @@ def annotation():
         while True:
             ret, img = camera.read()
             if ret:
-                row = img[200]
+                hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+                row = hsv[200]
                 for index in range(img.shape[0]):
-                    if row[index][0] > 100:
+                    if hsvThresholdLow[0] < row[index][0] < hsvThresholdHigh[0] \
+                            and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \
+                            and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
                         if index != 0:
                             robot.indicate(int(index/img.shape[0]))

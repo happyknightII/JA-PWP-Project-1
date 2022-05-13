@@ -37,15 +37,15 @@ $(function() {
             e.preventDefault()
             $.getJSON('/thresholdparameters?hh='
             + document.getElementById('hh').value
-            + 'vh='
+            + '&vh='
             + document.getElementById('vh').value
-            + 'sh='
+            + '&sh='
             + document.getElementById('sh').value
-            + 'hl='
+            + '&hl='
             + document.getElementById('hl').value
-            + 'vl='
+            + '&vl='
             + document.getElementById('vl').value
-            + 'sl='
+            + '&sl='
             + document.getElementById('sl').value,
                 function(data) {});
             return false;

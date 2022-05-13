@@ -139,7 +139,7 @@ def thresholdparameters():
     global hsvThresholdLow
     global hsvThresholdHigh
     if 'hh' not in request.args or 'vh' not in request.args or 'sh' not in request.args or 'hl' not in request.args or 'vl' not in request.args or 'sl' not in request.args:
-        return "missing arguments'"
+        return "missing arguments"
     hsvThresholdLow = [int(request.args['hl']), int(request.args['sl']), int(request.args['vl'])]
     hsvThresholdHigh = [int(request.args['hh']), int(request.args['sh']), int(request.args['vh'])]
 

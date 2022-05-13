@@ -134,7 +134,7 @@ def log_page():
 
 
 @app.route('/thresholdparameters')
-def control():
+def thresholdparameters():
     global hsvThresholdLow
     global hsvThresholdHigh
     if 'hh' not in request.args or 'vh' not in request.args or 'sh' not in request.args or 'hl' not in request.args or 'vl' not in request.args or 'sl' not in request.args:

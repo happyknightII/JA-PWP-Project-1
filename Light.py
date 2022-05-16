@@ -82,7 +82,8 @@ class LightStrip(PixelStrip):
         self.setPixelColor(index, Color(rgb[0], rgb[1], rgb[2]))
 
     def turnOff(self, show=True):
-        self.colorWipe((0, 0, 0), 10)
+        self.colorWipe((0, 0, 0), 0)
+        self.show()
 
     def __del__(self):
-        self.turnOff
+        self.turnOff()

@@ -65,7 +65,7 @@ def annotation():
             ret, img = camera.read()
             if ret:
                 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-                row = hsv[200]
+                row = hsv[100]
                 for index in range(img.shape[0]):
                     if hsvThresholdLow[0] < row[index][0] < hsvThresholdHigh[0] \
                             and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \

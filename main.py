@@ -58,6 +58,8 @@ def streamer():
 
 @app.route('/annotation')
 def annotation():
+    robot.strip.colorWipe((255, 255, 255))
+
     def stream(camera):
         while True:
             ret, img = camera.read()
@@ -69,8 +71,6 @@ def annotation():
                             and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \
                             and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
-                        if index != 0:
-                            robot.indicate(int(index/img.shape[0]))
                         break
                 frame = cv2.imencode('.jpg', img)[1].tobytes()
                 yield (b'--frame\r\n'

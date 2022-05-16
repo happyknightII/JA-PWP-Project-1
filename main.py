@@ -38,6 +38,7 @@ sys.stdout = Logger(sys.stdout, log)
 
 @app.route('/')
 def home():
+    robot.strip.turnOff()
     robot.indicate()
     return render_template("index.html")
 

@@ -53,14 +53,9 @@ class Robot:
         self.pause(1)
         self.drive((74.46+x, 68.2+y), 3)
 
-    def indicate(self, index):
-        self.strip.setPixel(int(index * 72), (255, 255, 255))
-        # if index > 0:
-        #     for i in range(72):
-        #         if i < index:
-        #             self.strip.setPixel(i, (int(255 * i/index), int(255 * i/index), int(255 * i/index)))
-        #         else:
-        #             self.strip.setPixel(i, (int(255 * (72-i)/index), int(255 * (72-i)/index), int(255 * (72-i)/index)))
+    def indicate(self):
+        for i in range(25, 45):
+            self.strip.setPixel(i, (255, 255, 255))
 
         self.strip.show()
 

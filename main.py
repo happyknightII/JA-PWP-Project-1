@@ -38,7 +38,7 @@ sys.stdout = Logger(sys.stdout, log)
 
 @app.route('/')
 def home():
-    robot.strip.turnOff()
+    robot.indicate()
     return render_template("index.html")
 
 
@@ -58,8 +58,6 @@ def streamer():
 
 @app.route('/annotation')
 def annotation():
-    robot.strip.colorWipe((255, 255, 255))
-
     def stream(camera):
         while True:
             ret, img = camera.read()

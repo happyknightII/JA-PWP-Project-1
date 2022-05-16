@@ -13,7 +13,7 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 robot = Robot()
 piCamera = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_COMPLEX
-hsvThresholdLow = [70, 70, 60]
+hsvThresholdLow = [70, 60, 70]
 hsvThresholdHigh = [120, 255, 255]
 
 

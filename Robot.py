@@ -15,9 +15,24 @@ class Robot:
         self.motors = (Motor((leftPins[0], leftPins[1]), leftPins[2]), Motor((rightPins[0], rightPins[1]), rightPins[2]))
         self.strip = LightStrip()
 
+    def enable(self, thing=True):
+        self.motors[0].enable(thing)
+        self.motors[1].enable(thing)
+
+    def driveRaw(self, forward, turn):
+        left = forward - turn
+        right = forward - turn
+        if abs(left) > 0.1:
+            self.motors[0].setPower(left)
+        else:
+            self.motors[0].setPower(0)
+        if abs(right) > 0.1:
+            self.motors[1].setPower(right)
+        else:
+            self.motors[1].setPower(0)
+
     def drive(self, power, duration):
-        self.motors[0].enable()
-        self.motors[1].enable()
+        self.enable()
         # start = 1.4
         startTime = time()
         deltaTime = 0

@@ -15,7 +15,10 @@ piCamera = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_COMPLEX
 hsvThresholdLow = [70, 60, 70]
 hsvThresholdHigh = [120, 255, 255]
-
+controlMode = False
+kPTurn = 0.1
+OFFSET_PIXELS = 0
+MAX_TURNRATE = 0.3
 
 class Logger:
     def __init__(self, *files):
@@ -59,6 +62,7 @@ def streamer():
 
 @app.route('/annotation')
 def annotation():
+    global controlMode, kPTurn, OFFSET_PIXELS, MAX_TURNRATE
     def stream(camera):
         while True:
             ret, img = camera.read()
@@ -82,6 +86,15 @@ def annotation():
                     cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
                     cv2.line(img, (rightX, 0), (rightX, img.shape[0]), (255, 192, 203))
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
+
+                    if controlMode:
+                        turnRate = kPTurn * (center - img.shape[1] / 2 + OFFSET_PIXELS)
+                        if abs(turnRate) > MAX_TURNRATE:
+                            turnRate = abs(turnRate) / turnRate * MAX_TURNRATE
+                        elif abs(turnRate) < 0.5:
+                            turnRate = 0
+                        robot.enable()
+                        robot.driveRaw(0.2, turnRate)
                     del leftX
                     del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
@@ -169,24 +182,37 @@ def thresholdparameters():
 
 @app.route('/control')
 def control():
+    global controlMode
     if 'command' not in request.args:
-        return "Try using 'Auto', 'Forward', or 'Turn'"
-    command = str(request.args['command'])
-    if command == "Auto":
-        robot.auto()
-    else:
-        try:
-            value = float(request.args['value'])
-        except:
-            return "value parameter should be a number"
-        if command == "Forward":
-            robot.forward(value)
-        elif command == "Turn":
-            robot.turn(value)
+        if 'mode' not in request.args:
+            return "Try using 'Auto', 'Forward', or 'Turn'"
         else:
-            return "Invalid Command: Try using 'Auto', 'Forward', or 'Turn'"
-    print(command + " " + str(value))
-    return command + " " + str(value)
+            if request.args['value'] == "True":
+                controlMode = True
+                return "Switched to autonomous mode"
+            elif request.args['value'] == "True":
+                controlMode = False
+                return "Switched to manual mode"
+    else:
+        if not controlMode:
+            command = str(request.args['command'])
+            if command == "Auto":
+                robot.auto()
+            else:
+                try:
+                    value = float(request.args['value'])
+                except:
+                    return "value parameter should be a number"
+                if command == "Forward":
+                    robot.forward(value)
+                elif command == "Turn":
+                    robot.turn(value)
+                else:
+                    return "Invalid Command: Try using 'Auto', 'Forward', or 'Turn'"
+            print(command + " " + str(value))
+            return command + " " + str(value)
+        else:
+            return "Autonomous mode"
 
 
 if __name__ == '__main__':

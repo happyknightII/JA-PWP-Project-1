@@ -9,6 +9,18 @@ var log = document.getElementById("log");
 
 
 $(function() {
+          $('a#autonomousButton').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/control?mode=True',
+                function(data) {});
+            return false;
+          });
+          $('a#manualButton').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/control?mode=False',
+                function(data) {});
+            return false;
+          });
           $('a#forwardButton').on('click', function(e) {
             e.preventDefault()
             $.getJSON('/control?command=Forward&value=' + document.getElementById('distance').value,

@@ -63,6 +63,7 @@ def streamer():
 @app.route('/annotation')
 def annotation():
     global controlMode, kPTurn, OFFSET_PIXELS, MAX_TURNRATE
+
     def stream(camera):
         while True:
             ret, img = camera.read()
@@ -190,7 +191,7 @@ def control():
             if request.args['value'] == "True":
                 controlMode = True
                 return "Switched to autonomous mode"
-            elif request.args['value'] == "True":
+            elif request.args['value'] == "False":
                 controlMode = False
                 return "Switched to manual mode"
     else:

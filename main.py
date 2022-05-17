@@ -81,7 +81,7 @@ def annotation():
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
                         rightX = index
                         break
-                cv2.circle(img, (int((leftX - rightX) / 2), 100), 20, (255, 255, 255), -1)
+                cv2.circle(img, (int((leftX + rightX) / 2), 100), 20, (255, 255, 255), -1)
                 cv2.line(img, (0, 100), (img.shape[1], 100), (255, 0, 255))
 
                 frame = cv2.imencode('.jpg', img)[1].tobytes()

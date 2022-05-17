@@ -80,7 +80,7 @@ def annotation():
                 if leftX is not None and rightX is not None:
                     center = int((leftX + rightX) / 2)
                     cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
-                    cv2.line(img, (rightX, 0), (leftX, img.shape[0]), (255, 192, 203))
+                    cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
                     del leftX
                     del rightX

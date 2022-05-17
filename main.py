@@ -49,14 +49,17 @@ def home():
 @app.route('/stream')
 def streamer():
     def stream(camera):
+        lastTime = time.time()
         while True:
-            ret, img = camera.read()
-            if ret:
-                frame = cv2.imencode('.jpg', img)[1].tobytes()
-                yield (b'--frame\r\n'
-                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-            else:
-                break
+            if time.time() > 0.1 + lastTime:
+                lastTime = time.time()
+                ret, img = camera.read()
+                if ret:
+                    frame = cv2.imencode('.jpg', img)[1].tobytes()
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                else:
+                    break
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 

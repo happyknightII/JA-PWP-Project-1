@@ -77,12 +77,13 @@ def annotation():
                             and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
                         rightX = index
                         break
-                if leftX is None and rightX is None:
+                if leftX is not None and rightX is not None:
                     center = int((leftX + rightX) / 2)
                     cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
                     cv2.line(img, (rightX, 0), (leftX, img.shape[0]), (255, 192, 203))
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
-
+                    del leftX
+                    del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
 
                 frame = cv2.imencode('.jpg', img)[1].tobytes()

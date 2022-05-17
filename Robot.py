@@ -54,12 +54,8 @@ class Robot:
         self.drive((74.46+x, 68.2+y), 3)
 
     def indicate(self):
-        for i in range(23):
-            self.strip.setPixel(i, (0, 1, 0))
         for i in range(23, 45):
-            self.strip.setPixel(i, (150, 150, 150))
-        for i in range(45, 72):
-            self.strip.setPixel(i, (0, 1, 0))
+            self.strip.setPixel(i, (100, 100, 100))
 
         self.strip.show()
 

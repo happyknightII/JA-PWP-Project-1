@@ -73,6 +73,8 @@ def annotation():
             if time.time() > 0.1 + lastTime:
                 lastTime = time.time()
                 ret, img = camera.read()
+                leftX = None
+                rightX = None
                 if ret:
                     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
                     row = hsv[100]

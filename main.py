@@ -65,19 +65,25 @@ def annotation():
             if ret:
                 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
                 row = hsv[100]
-                for index in range(img.shape[0]):
+                leftX = 0
+                rightX = 0
+                for index in range(img.shape[1]):
                     if hsvThresholdLow[0] < row[index][0] < hsvThresholdHigh[0] \
                             and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \
                             and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
+                        leftX = index
                         break
-                for index in reversed(range(img.shape[0])):
+                for index in reversed(range(img.shape[1])):
                     if hsvThresholdLow[0] < row[index][0] < hsvThresholdHigh[0] \
                             and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \
                             and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
                         cv2.circle(img, (index, 100), 10, (255, 255, 255), -1)
+                        rightX = index
                         break
-                cv2.line(img, (0, 100), (img.shape[0], 100), (255, 0, 255))
+                cv2.circle(img, (int((leftX - rightX) / 2), 100), 10, (255, 255, 255), -1)
+                cv2.line(img, (0, 100), (img.shape[1], 100), (255, 0, 255))
+
                 frame = cv2.imencode('.jpg', img)[1].tobytes()
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')

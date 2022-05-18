@@ -1,8 +1,6 @@
-from Motor import Motor
+from Motor import Motor, cleanUp
 from time import time, sleep
-# import math
 from Light import LightStrip
-import RPi.GPIO as IO
 
 LEFT_PINS = (14, 15, 24)
 RIGHT_PINS = (17, 27, 23)
@@ -31,9 +29,8 @@ class Robot:
         else:
             self.motors[1].setPower(0)
 
-    def drive(self, power, duration):
+    def driveTime(self, power, duration):
         self.enable()
-        # start = 1.4
         startTime = time()
         deltaTime = 0
         while deltaTime < duration:
@@ -45,28 +42,28 @@ class Robot:
 
     def forward(self, sec):
         if sec > 0:
-            self.drive((74.46+x, 68.2+y), sec)
+            self.driveTime((74.46 + x, 68.2 + y), sec)
         elif sec < 0:
-            self.drive((-64, -68.2), -sec)
+            self.driveTime((-64, -68.2), -sec)
 
     def turn(self, degrees):
         if degrees > 0:
-            self.drive((45+x, 0), 1.33 * degrees/90)
+            self.driveTime((45 + x, 0), 1.33 * degrees / 90)
         elif degrees < 0:
-            self.drive((0, 43.74+y), 1.33 * -degrees/90)
+            self.driveTime((0, 43.74 + y), 1.33 * -degrees / 90)
 
     def auto(self):
-        self.drive((74.46+x, 68.2+y), 2.97)
-        self.pause(1)
-        self.drive((50+x, 0), 1.33)
-        self.pause(1)
-        self.drive((74.46+x, 68.2+y), 3.5)
-        self.pause(1)
-        self.drive((-64, -68.2), 1.3)
-        self.pause(1)
-        self.drive((50+x, 0), 1.33)
-        self.pause(1)
-        self.drive((74.46+x, 68.2+y), 3)
+        self.driveTime((74.46 + x, 68.2 + y), 2.97)
+        sleep(1)
+        self.driveTime((50 + x, 0), 1.33)
+        sleep(1)
+        self.driveTime((74.46 + x, 68.2 + y), 3.5)
+        sleep(1)
+        self.driveTime((-64, -68.2), 1.3)
+        sleep(1)
+        self.driveTime((50 + x, 0), 1.33)
+        sleep(1)
+        self.driveTime((74.46 + x, 68.2 + y), 3)
 
     def indicate(self):
         for i in range(23, 45):
@@ -74,9 +71,6 @@ class Robot:
 
         self.strip.show()
 
-    def pause(self, time1):
-        sleep(time1)
-
     def __del__(self):
         del self.motors
-        IO.cleanup()
+        cleanUp()

@@ -3,6 +3,10 @@ import RPi.GPIO as IO
 IO.setmode(IO.BCM)
 
 
+def cleanUp():
+    IO.cleanup()
+
+
 class Motor:
     def __init__(self, pins, ena):
         IO.setup(pins[0], IO.OUT)

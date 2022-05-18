@@ -4,66 +4,94 @@
     <meta charset="UTF-8">
     <title>Tuning</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='tuning.css') }}">
 </head>
 <body>
     <table>
         <tr>
-            <td class="quadrants">
+            <td class="quadrantLarge">
                 <div id="streamQuadrant" class="secondQuadrant">
-                    <img src="getrgb">
+                    <img src="{{url_for('colorPicker') }}">
                 </div>
             </td>
-            <td class="quadrants">
+            <td class="quadrantLarge">
                 <div id="blankQuadrant" class="secondQuadrant">
-                    <img src="threshold">
+                    <img src="{{url_for('threshold') }}">
                 </div>
             </td>
         </tr>
         <tr>
-            <td class="quadrants">
+            <td class="quadrantSmall">
                 <form id="controlQuadrant" class="secondQuadrant">
-                    <table>
-                        <tr>
-                            <td>
-                                <input id="hh" type="number" placeholder="hh">
-                            </td>
-                            <td>
-                                <input id="sh" type="number" placeholder="vh">
-                            </td>
-                            <td>
-                                <input id="vh" type="number" placeholder="sh">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input id="hl" type="number" placeholder="hl">
-                            </td>
-                            <td>
-                                <input id="sl" type="number" placeholder="vl">
-                            </td>
-                            <td>
-                                <input id="vl" type="number" placeholder="sl">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href=# id=threshold><button>Change Values</button></a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="scroller">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="slidecontainer">
+                                        <label>High Hue</label>
+                                        <input type="range" min="0" max="255" value="150" class="slider" id="hh">
+                                    </div>
+                                    <label id="hhText">0</label>
+                                </td>
+                                <td>
+                                    <label>High Saturation</label>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="255" value="150" class="slider" id="sh">
+                                    </div>
+                                    <label id="shText">0</label>
+                                </td>
+                                <td>
+                                    <label>High Value</label>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="255" value="150" class="slider" id="vh">
+                                    </div>
+                                    <label id="vhText">0</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Low Hue</label>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="255" value="150" class="slider" id="hl">
+                                    </div>
+                                    <label id="hlText">0</label>
+                                </td>
+                                <td>
+                                    <label>Low Saturation</label>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="255" value="150" class="slider" id="sl">
+                                    </div>
+                                    <label id="slText">0</label>
+                                </td>
+                                <td>
+                                    <label>Low Value</label>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="255" value="150" class="slider" id="vl">
+                                    </div>
+                                    <label id="vlText">0</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </form>
             </td>
-            <td class="quadrants">
+            <td class="quadrantSmall">
                 <div id="logQuadrant" class="secondQuadrant">
-                    <h1>Log:</h1>
-                    <p id="log">Here will be log</p>
+                    <div id="scroller">
+                            <h1>Log:</h1>
+                        <p id="log">Here will be log</p>
+                    </div>
+
                 </div>
             </td>
         </tr>
     </table>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script src="{{url_for('static', filename='tuning.js')}}"></script>
+    <script>
+        window.logPageURL = "{{url_for('log_page')}}";
+        window.hsvFilterURL = "{{url_for('hsvFilter')}}";
+        window.onload = load;
+    </script>
 </body>
 </html>

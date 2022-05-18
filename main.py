@@ -5,7 +5,7 @@ from flask import Flask, Response, render_template, request
 import cv2
 import numpy as np
 import time
-
+import json
 from Robot import Robot
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -13,12 +13,23 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 robot = Robot()
 piCamera = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_COMPLEX
-hsvThresholdLow = [70, 60, 70]
-hsvThresholdHigh = [120, 255, 255]
 controlMode = False
-kPTurn = 0.1
-OFFSET_PIXELS = 0
-MAX_TURNRATE = 0.3
+with open("settings.json") as settingsFile:
+    settings = json.load(settingsFile)
+
+
+@app.route("/save")
+def saveSettings():
+    print('Settings saved')
+    with open("settings.json", "w") as write_file:
+        data = {"kPTurn": settings["kPTurn"],
+                "maxTurnRate": settings["maxTurnRate"],
+                "maxFrameRate": settings["maxFrameRate"],
+                "hsvHigh": settings["hsvHigh"],
+                "hsvLow": settings["hsvLow"]}
+        json.dump(data, write_file, ensure_ascii=False, indent=4)
+    return "Saved settings"
+
 
 class Logger:
     def __init__(self, *files):
@@ -51,7 +62,7 @@ def streamer():
     def stream(camera):
         lastTime = time.time()
         while True:
-            if time.time() > 0.1 + lastTime:
+            if time.time() > 1/settings["maxFrameRate"] + lastTime:
                 lastTime = time.time()
                 ret, img = camera.read()
                 if ret:
@@ -65,12 +76,12 @@ def streamer():
 
 @app.route('/annotation')
 def annotation():
-    global controlMode, kPTurn, OFFSET_PIXELS, MAX_TURNRATE
+    global controlMode
 
     def stream(camera):
         lastTime = time.time()
         while True:
-            if time.time() > 0.1 + lastTime:
+            if time.time() > 1/settings["maxFrameRate"] + lastTime:
                 lastTime = time.time()
                 ret, img = camera.read()
                 leftX = None
@@ -79,15 +90,15 @@ def annotation():
                     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
                     row = hsv[100]
                     for index in range(img.shape[1]):
-                        if hsvThresholdLow[0] < row[index][0] < hsvThresholdHigh[0] \
-                                and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \
-                                and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
+                        if settings["hsvLow"][0] < row[index][0] < settings["hsvHigh"][0] \
+                                and settings["hsvLow"][1] < row[index][1] < settings["hsvHigh"][1] \
+                                and settings["hsvLow"][2] < row[index][2] < settings["hsvHigh"][2]:
                             leftX = index
                             break
                     for index in reversed(range(img.shape[1])):
-                        if hsvThresholdLow[0] < row[index][0] < hsvThresholdHigh[0] \
-                                and hsvThresholdLow[1] < row[index][1] < hsvThresholdHigh[1] \
-                                and hsvThresholdLow[2] < row[index][2] < hsvThresholdHigh[2]:
+                        if settings["hsvLow"][0] < row[index][0] < settings["hsvHigh"][0] \
+                                and settings["hsvLow"][1] < row[index][1] < settings["hsvHigh"][1] \
+                                and settings["hsvLow"][2] < row[index][2] < settings["hsvHigh"][2]:
                             rightX = index
                             break
                     if leftX is not None and rightX is not None:
@@ -97,9 +108,9 @@ def annotation():
                         cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
                         if controlMode:
-                            turnRate = kPTurn * (center - img.shape[1] / 2 + OFFSET_PIXELS)
-                            if abs(turnRate) > MAX_TURNRATE:
-                                turnRate = abs(turnRate) / turnRate * MAX_TURNRATE
+                            turnRate = settings["kPTurn"] * (center - img.shape[1] / 2 + settings["offsetPixels"])
+                            if abs(turnRate) > settings["maxTurnRate"]:
+                                turnRate = abs(turnRate) / turnRate * settings["maxTurnRate"]
                             elif abs(turnRate) < 0.5:
                                 turnRate = 0
                             robot.enable()
@@ -116,27 +127,29 @@ def annotation():
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/tuning/getrgb')
-def tuning():
+@app.route('/colorPicker')
+def colorPicker():
     def stream(camera):
+        lastTime = time.time()
         while True:
-            ret, img = camera.read()
-            if ret:
-                cropped_image = img[int(img.shape[0]/2) - 15:int(img.shape[0]/2 + 15), int(img.shape[1]/2) - 15:int(img.shape[1]/2) + 15]
-                hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
-                rgb_average = np.average(cropped_image, axis=(0, 1))
-                average = np.average(hsv, axis=(0, 1))
+            if time.time() > 1 / settings["maxFrameRate"] + lastTime:
+                ret, img = camera.read()
+                if ret:
+                    cropped_image = img[int(img.shape[0]/2) - 15:int(img.shape[0]/2 + 15), int(img.shape[1]/2) - 15:int(img.shape[1]/2) + 15]
+                    hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
+                    rgb_average = np.average(cropped_image, axis=(0, 1))
+                    average = np.average(hsv, axis=(0, 1))
 
-                cv2.line(img, (int(img.shape[1]/2), 0), (int(img.shape[1]/2), int(img.shape[0])), (255, 255, 255), 1)
-                cv2.line(img, (0, int(img.shape[0]/2)), (int(img.shape[1]), int(img.shape[0]/2)), (255, 255, 255), 1)
-                cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 20, (255, 255, 255), 1)
-                cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 10, rgb_average, -1)
-                cv2.putText(img, f"{average}", (10, 200), cv2.FONT_HERSHEY_COMPLEX,  0.5, (255, 255, 255), 1)
-                frame = cv2.imencode('.jpg', img)[1].tobytes()
-                yield (b'--frame\r\n'
-                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-            else:
-                break
+                    cv2.line(img, (int(img.shape[1]/2), 0), (int(img.shape[1]/2), int(img.shape[0])), (255, 255, 255), 1)
+                    cv2.line(img, (0, int(img.shape[0]/2)), (int(img.shape[1]), int(img.shape[0]/2)), (255, 255, 255), 1)
+                    cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 20, (255, 255, 255), 1)
+                    cv2.circle(img, (int(img.shape[1]/2), int(img.shape[0]/2)), 10, rgb_average, -1)
+                    cv2.putText(img, f"{average}", (10, 200), cv2.FONT_HERSHEY_COMPLEX,  0.5, (255, 255, 255), 1)
+                    frame = cv2.imencode('.jpg', img)[1].tobytes()
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                else:
+                    break
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
@@ -145,18 +158,18 @@ def create():
     return render_template('tuning.html')
 
 
-@app.route('/tuning/threshold')
+@app.route('/threshold')
 def threshold():
     def stream(camera):
         lastTime = time.time()
         while True:
-            if time.time() > 0.1 + lastTime:
+            if time.time() > 1/settings["maxFrameRate"] + lastTime:
                 lastTime = time.time()
                 ret, img = camera.read()
                 if ret:
                     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-                    HSV_MIN = np.array(hsvThresholdLow, np.uint8)
-                    HSV_MAX = np.array(hsvThresholdHigh, np.uint8)
+                    HSV_MIN = np.array(settings["hsvLow"], np.uint8)
+                    HSV_MAX = np.array(settings["hsvHigh"], np.uint8)
 
                     frame_threshed = cv2.inRange(hsv, HSV_MIN, HSV_MAX)
 
@@ -177,14 +190,29 @@ def log_page():
     return Response(gen())
 
 
+@app.route('/hsvFilter')
+def hsvFilter():
+
+    def gen():
+        yield " ".join(str(e) for e in settings["hsvHigh"]) + " " + " ".join(str(e) for e in settings["hsvLow"])
+    return Response(gen())
+
+
 @app.route('/thresholdparameters')
 def thresholdparameters():
-    global hsvThresholdLow
-    global hsvThresholdHigh
-    if 'hh' not in request.args or 'vh' not in request.args or 'sh' not in request.args or 'hl' not in request.args or 'vl' not in request.args or 'sl' not in request.args:
-        return "missing arguments"
-    hsvThresholdLow = [int(request.args['hl']), int(request.args['sl']), int(request.args['vl'])]
-    hsvThresholdHigh = [int(request.args['hh']), int(request.args['sh']), int(request.args['vh'])]
+    if 'hh' in request.args:
+        settings["hsvHigh"][0] = int(request.args['hh'])
+    if 'sh' in request.args:
+        settings["hsvHigh"][1] = int(request.args['sh'])
+    if 'vh' in request.args:
+        settings["hsvHigh"][2] = int(request.args['vh'])
+
+    if 'hl' in request.args:
+        settings["hsvLow"][0] = int(request.args['hl'])
+    if 'sl' in request.args:
+        settings["hsvLow"][1] = int(request.args['sl'])
+    if 'vl' in request.args:
+        settings["hsvLow"][2] = int(request.args['vl'])
 
     return "arguments saved"
 
@@ -222,6 +250,11 @@ def control():
             return command + " " + str(value)
         else:
             return "Autonomous mode"
+
+
+@app.route('/bigAssButton')
+def saveSettingsPage():
+    return render_template("saveButton.html")
 
 
 if __name__ == '__main__':

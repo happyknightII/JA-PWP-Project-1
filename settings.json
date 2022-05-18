@@ -1,0 +1,15 @@
+{
+    "kPTurn": 0.1,
+    "maxTurnRate": 0.3,
+    "maxFrameRate": 60,
+    "hsvHigh": [
+        120,
+        255,
+        255
+    ],
+    "hsvLow": [
+        70,
+        60,
+        70
+    ]
+}

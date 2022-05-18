@@ -25,6 +25,7 @@ def save_settings():
         data = {"kPTurn": settings["kPTurn"],
                 "maxTurnRate": settings["maxTurnRate"],
                 "maxFrameRate": settings["maxFrameRate"],
+                "offsetPixels": settings["offsetPixels"],
                 "hsvHigh": settings["hsvHigh"],
                 "hsvLow": settings["hsvLow"]}
         json.dump(data, write_file, ensure_ascii=False, indent=4)

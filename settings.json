@@ -2,6 +2,7 @@
     "kPTurn": 0.1,
     "maxTurnRate": 0.3,
     "maxFrameRate": 60,
+    "offsetPixels": 0,
     "hsvHigh": [
         120,
         255,

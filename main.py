@@ -19,7 +19,7 @@ with open("settings.json") as settingsFile:
 
 
 @app.route("/save")
-def saveSettings():
+def save_settings():
     print('Settings saved')
     with open("settings.json", "w") as write_file:
         data = {"kPTurn": settings["kPTurn"],
@@ -52,7 +52,7 @@ sys.stdout = Logger(sys.stdout, log)
 
 @app.route('/')
 def home():
-    robot.strip.turnOff()
+    robot.strip.turn_off()
     robot.indicate()
     return render_template("index.html")
 
@@ -114,7 +114,7 @@ def annotation():
                             elif abs(turnRate) < 0.5:
                                 turnRate = 0
                             robot.enable()
-                            robot.driveRaw(0.2, turnRate)
+                            robot.drive_raw(0.2, turnRate)
                         del leftX
                         del rightX
                     cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
@@ -128,7 +128,7 @@ def annotation():
 
 
 @app.route('/colorPicker')
-def colorPicker():
+def color_picker():
     def stream(camera):
         lastTime = time.time()
         while True:
@@ -191,7 +191,7 @@ def log_page():
 
 
 @app.route('/hsvFilter')
-def hsvFilter():
+def hsv_filter():
 
     def gen():
         yield " ".join(str(e) for e in settings["hsvHigh"]) + " " + " ".join(str(e) for e in settings["hsvLow"])
@@ -199,7 +199,7 @@ def hsvFilter():
 
 
 @app.route('/thresholdparameters')
-def thresholdparameters():
+def threshold_parameters():
     if 'hh' in request.args:
         settings["hsvHigh"][0] = int(request.args['hh'])
     if 'sh' in request.args:
@@ -253,7 +253,7 @@ def control():
 
 
 @app.route('/bigAssButton')
-def saveSettingsPage():
+def save_settings_page():
     return render_template("saveButton.html")
 
 

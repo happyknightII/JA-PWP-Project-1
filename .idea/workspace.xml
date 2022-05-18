@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38f30f59-3bc4-43f9-bb54-395e2c0688a9" name="Default Changelist" comment="tries to fix things">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DummyLight.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DummyRobot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/tuning.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/tuning.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/saveButton.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/JA-PWP-Project-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JA-PWP-Project-1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Not Used/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DummyLight.py" beforeDir="false" afterPath="$PROJECT_DIR$/DummyLight.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DummyRobot.py" beforeDir="false" afterPath="$PROJECT_DIR$/DummyRobot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Light.py" beforeDir="false" afterPath="$PROJECT_DIR$/Light.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Motor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Motor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Not Used/Light.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Robot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/tuning.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tuning.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

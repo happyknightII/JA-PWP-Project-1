@@ -3,16 +3,16 @@ from DummyLight import LightStrip
 
 
 class Robot:
-    def __init__(self, leftPins=None, rightPins=None):
+    def __init__(self, left_pins=None, right_pins=None):
         self.strip = LightStrip()
 
     def enable(self, thing=None):
         return
 
-    def driveRaw(self, forward, turn):
+    def drive_raw(self, forward, turn):
         return
 
-    def driveTime(self, power, duration):
+    def drive_time(self, power, duration):
         return
 
     def forward(self, sec):

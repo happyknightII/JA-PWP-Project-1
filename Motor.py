@@ -3,7 +3,7 @@ import RPi.GPIO as IO
 IO.setmode(IO.BCM)
 
 
-def cleanUp():
+def clean_up():
     IO.cleanup()
 
 
@@ -25,7 +25,7 @@ class Motor:
             self.pins[0].stop()
             self.pins[1].stop()
             
-    def setPower(self, power, brake=False):
+    def set_power(self, power, brake=False):
         if power > 0:
             self.pins[0].ChangeDutyCycle(power)
             self.pins[1].ChangeDutyCycle(0)

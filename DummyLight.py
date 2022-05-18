@@ -4,32 +4,32 @@ class LightStrip:
     def __init__(self, brightness=None):
         return
 
-    def setPixelColor(self):
+    def set_pixel_color(self):
         return
 
     def show(self):
         return
 
-    def colorWipe(self, rgb, wait_ms=None, show=None):
+    def color_wipe(self, rgb, wait_ms=None, show=None):
         return
 
-    def theaterChase(self, rgb, wait_ms=None, iterations=None):
+    def theater_chase(self, rgb, wait_ms=None, iterations=None):
         return
 
     def rainbow(self, wait_ms=None, iterations=None):
         return
 
-    def rainbowCycle(self, wait_ms=None, iterations=None):
+    def rainbow_cycle(self, wait_ms=None, iterations=None):
         return
 
-    def theaterChaseRainbow(self, wait_ms=None):
+    def theater_chase_rainbow(self, wait_ms=None):
         return
 
-    def setPixel(self, index, rgb):
+    def set_pixel(self, index, rgb):
         return
 
-    def turnOff(self, show=None):
+    def turn_off(self, show=None):
         return
 
     def __del__(self):
-        self.turnOff()
+        self.turn_off()

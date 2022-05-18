@@ -30,7 +30,7 @@ class LightStrip(PixelStrip):
         self.begin()
 
     # Define functions which animate LEDs in various ways.
-    def colorWipe(self, rgb, wait_ms=50, show=True):
+    def color_wipe(self, rgb, wait_ms=50, show=True):
 
         """Wipe color across display a pixel at a time."""
         for i in range(self.numPixels()):
@@ -39,7 +39,7 @@ class LightStrip(PixelStrip):
                 self.show()
             time.sleep(wait_ms / 1000.0)
 
-    def theaterChase(self, rgb, wait_ms=50, iterations=10):
+    def theater_chase(self, rgb, wait_ms=50, iterations=10):
         """Movie theater light style chaser animation."""
         for j in range(iterations):
             for q in range(3):
@@ -58,7 +58,7 @@ class LightStrip(PixelStrip):
             self.show()
             time.sleep(wait_ms / 1000.0)
 
-    def rainbowCycle(self, wait_ms=20, iterations=5):
+    def rainbow_cycle(self, wait_ms=20, iterations=5):
         """Draw rainbow that uniformly distributes itself across all pixels."""
         for j in range(256 * iterations):
             for i in range(self.numPixels()):
@@ -67,7 +67,7 @@ class LightStrip(PixelStrip):
             self.show()
             time.sleep(wait_ms / 1000.0)
 
-    def theaterChaseRainbow(self, wait_ms=50):
+    def theater_chase_rainbow(self, wait_ms=50):
         """Rainbow movie theater light style chaser animation."""
         for j in range(256):
             for q in range(3):
@@ -78,12 +78,12 @@ class LightStrip(PixelStrip):
                 for i in range(0, self.numPixels(), 3):
                     self.setPixelColor(i + q, 0)
 
-    def setPixel(self, index, rgb):
+    def set_pixel(self, index, rgb):
         self.setPixelColor(index, Color(rgb[0], rgb[1], rgb[2]))
 
-    def turnOff(self, show=True):
-        self.colorWipe((0, 0, 0), 0)
+    def turn_off(self, show=True):
+        self.color_wipe((0, 0, 0), 0)
         self.show()
 
     def __del__(self):
-        self.turnOff()
+        self.turn_off()

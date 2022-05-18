@@ -61,17 +61,14 @@ def home():
 @app.route('/stream')
 def streamer():
     def stream(camera):
-        lastTime = time.time()
         while True:
-            if time.time() > 1/settings["maxFrameRate"] + lastTime:
-                lastTime = time.time()
-                ret, img = camera.read()
-                if ret:
-                    frame = cv2.imencode('.jpg', img)[1].tobytes()
-                    yield (b'--frame\r\n'
-                           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-                else:
-                    break
+            ret, img = camera.read()
+            if ret:
+                frame = cv2.imencode('.jpg', img)[1].tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            else:
+                break
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
@@ -80,51 +77,48 @@ def annotation():
     global controlMode
 
     def stream(camera):
-        lastTime = time.time()
         while True:
-            if time.time() > 1/settings["maxFrameRate"] + lastTime:
-                lastTime = time.time()
-                ret, img = camera.read()
-                leftX = None
-                rightX = None
-                if ret:
-                    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-                    row = hsv[100]
-                    for index in range(img.shape[1]):
-                        if settings["hsvLow"][0] < row[index][0] < settings["hsvHigh"][0] \
-                                and settings["hsvLow"][1] < row[index][1] < settings["hsvHigh"][1] \
-                                and settings["hsvLow"][2] < row[index][2] < settings["hsvHigh"][2]:
-                            leftX = index
-                            break
-                    for index in reversed(range(img.shape[1])):
-                        if settings["hsvLow"][0] < row[index][0] < settings["hsvHigh"][0] \
-                                and settings["hsvLow"][1] < row[index][1] < settings["hsvHigh"][1] \
-                                and settings["hsvLow"][2] < row[index][2] < settings["hsvHigh"][2]:
-                            rightX = index
-                            break
-                    if leftX is not None and rightX is not None:
-                        center = int((leftX + rightX) / 2)
-                        cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
-                        cv2.line(img, (rightX, 0), (rightX, img.shape[0]), (255, 192, 203))
-                        cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
+            ret, img = camera.read()
+            leftX = None
+            rightX = None
+            if ret:
+                hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+                row = hsv[100]
+                for index in range(img.shape[1]):
+                    if settings["hsvLow"][0] < row[index][0] < settings["hsvHigh"][0] \
+                            and settings["hsvLow"][1] < row[index][1] < settings["hsvHigh"][1] \
+                            and settings["hsvLow"][2] < row[index][2] < settings["hsvHigh"][2]:
+                        leftX = index
+                        break
+                for index in reversed(range(img.shape[1])):
+                    if settings["hsvLow"][0] < row[index][0] < settings["hsvHigh"][0] \
+                            and settings["hsvLow"][1] < row[index][1] < settings["hsvHigh"][1] \
+                            and settings["hsvLow"][2] < row[index][2] < settings["hsvHigh"][2]:
+                        rightX = index
+                        break
+                if leftX is not None and rightX is not None:
+                    center = int((leftX + rightX) / 2)
+                    cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
+                    cv2.line(img, (rightX, 0), (rightX, img.shape[0]), (255, 192, 203))
+                    cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
-                        if controlMode:
-                            turnRate = settings["kPTurn"] * (center - img.shape[1] / 2 + settings["offsetPixels"])
-                            if abs(turnRate) > settings["maxTurnRate"]:
-                                turnRate = abs(turnRate) / turnRate * settings["maxTurnRate"]
-                            elif abs(turnRate) < 0.5:
-                                turnRate = 0
-                            robot.enable()
-                            robot.drive_raw(0.2, turnRate)
-                        del leftX
-                        del rightX
-                    cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
+                    if controlMode:
+                        turnRate = settings["kPTurn"] * (center - img.shape[1] / 2 + settings["offsetPixels"])
+                        if abs(turnRate) > settings["maxTurnRate"]:
+                            turnRate = abs(turnRate) / turnRate * settings["maxTurnRate"]
+                        elif abs(turnRate) < 0.5:
+                            turnRate = 0
+                        robot.enable()
+                        robot.drive_raw(0.2, turnRate)
+                    del leftX
+                    del rightX
+                cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
 
-                    frame = cv2.imencode('.jpg', img)[1].tobytes()
-                    yield (b'--frame\r\n'
-                           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-                else:
-                    break
+                frame = cv2.imencode('.jpg', img)[1].tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            else:
+                break
     return Response(stream(piCamera), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 

@@ -112,7 +112,7 @@ $(function() {
     });
     $( "#sliderSpeed" ).slider({
         orientation: "horizontal",
-        min: -70,
+        min: 0,
         max: 70,
         step: 1,
         value: 0,

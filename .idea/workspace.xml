@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38f30f59-3bc4-43f9-bb54-395e2c0688a9" name="Default Changelist" comment="tries to fix things">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/tuning.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/tuning.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +17,85 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+            <state relative-caret-position="723">
+              <caret line="132" column="50" lean-forward="true" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
+              <folding>
+                <element signature="e#386#455#0" />
+                <element signature="e#504#611#0" />
+                <element signature="e#659#1229#0" />
+                <element signature="e#742#1201#0" />
+                <element signature="e#749#1135#0" />
+                <element signature="e#1250#1532#0" />
+                <element signature="e#1286#1304#0" />
+                <element signature="e#1340#1459#0" />
+                <element signature="e#1373#1459#0" />
+                <element signature="e#1490#1532#0" />
+                <element signature="e#1637#1721#0" />
+                <element signature="e#1766#2173#0" />
+                <element signature="e#1794#2081#0" />
+                <element signature="e#1818#2081#0" />
+                <element signature="e#1879#2041#0" />
+                <element signature="e#1949#2022#0" />
+                <element signature="e#2556#2884#0" />
+                <element signature="e#2841#2884#0" />
+                <element signature="e#2965#3294#0" />
+                <element signature="e#3250#3294#0" />
+                <element signature="e#4742#6189#0" />
+                <element signature="e#4770#6097#0" />
+                <element signature="e#4825#6097#0" />
+                <element signature="e#4899#6097#0" />
+                <element signature="e#4968#6049#0" />
+                <element signature="e#5953#6030#0" />
+                <element signature="e#6233#6270#0" />
+                <element signature="e#6319#7179#0" />
+                <element signature="e#6347#7087#0" />
+                <element signature="e#6402#7087#0" />
+                <element signature="e#6474#7087#0" />
+                <element signature="e#6582#7039#0" />
+                <element signature="e#6943#7020#0" />
+                <element signature="e#7225#7360#0" />
+                <element signature="e#7244#7333#0" />
+                <element signature="e#7437#7694#0" />
+                <element signature="e#8346#8720#0" />
+                <element signature="e#8463#8720#0" />
+                <element signature="e#8514#8585#0" />
+                <element signature="e#8652#8720#0" />
+                <element signature="e#8739#9466#0" />
+                <element signature="e#8771#9415#0" />
+                <element signature="e#8907#9323#0" />
+                <element signature="e#9527#9568#0" />
+                <element signature="e#9602#9656#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Robot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/tuning.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="97" column="72" lean-forward="true" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -68,10 +142,10 @@
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/saveButton.html" />
         <option value="$PROJECT_DIR$/settings.json" />
-        <option value="$PROJECT_DIR$/static/tuning.js" />
         <option value="$PROJECT_DIR$/static/index.js" />
         <option value="$PROJECT_DIR$/Robot.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/static/tuning.js" />
       </list>
     </option>
   </component>
@@ -287,7 +361,7 @@
     <frame x="0" y="23" width="2048" height="1036" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49173555" weight="0.093241245" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49173555" visible="true" weight="0.093241245" />
       <window_info id="Structure" order="1" sideWeight="0.5082645" side_tool="true" weight="0.093241245" />
       <window_info id="Favorites" order="2" sideWeight="0.5031447" side_tool="true" weight="0.24962999" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -395,13 +469,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/script.js" />
-    <entry file="file://$PROJECT_DIR$/settings.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/tuning.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -419,24 +486,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/tuning.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Motor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Robot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
@@ -447,10 +500,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Robot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state relative-caret-position="723">
+          <caret line="132" column="50" lean-forward="true" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
+          <folding>
+            <element signature="e#386#455#0" />
+            <element signature="e#504#611#0" />
+            <element signature="e#659#1229#0" />
+            <element signature="e#742#1201#0" />
+            <element signature="e#749#1135#0" />
+            <element signature="e#1250#1532#0" />
+            <element signature="e#1286#1304#0" />
+            <element signature="e#1340#1459#0" />
+            <element signature="e#1373#1459#0" />
+            <element signature="e#1490#1532#0" />
+            <element signature="e#1637#1721#0" />
+            <element signature="e#1766#2173#0" />
+            <element signature="e#1794#2081#0" />
+            <element signature="e#1818#2081#0" />
+            <element signature="e#1879#2041#0" />
+            <element signature="e#1949#2022#0" />
+            <element signature="e#2556#2884#0" />
+            <element signature="e#2841#2884#0" />
+            <element signature="e#2965#3294#0" />
+            <element signature="e#3250#3294#0" />
+            <element signature="e#4742#6189#0" />
+            <element signature="e#4770#6097#0" />
+            <element signature="e#4825#6097#0" />
+            <element signature="e#4899#6097#0" />
+            <element signature="e#4968#6049#0" />
+            <element signature="e#5953#6030#0" />
+            <element signature="e#6233#6270#0" />
+            <element signature="e#6319#7179#0" />
+            <element signature="e#6347#7087#0" />
+            <element signature="e#6402#7087#0" />
+            <element signature="e#6474#7087#0" />
+            <element signature="e#6582#7039#0" />
+            <element signature="e#6943#7020#0" />
+            <element signature="e#7225#7360#0" />
+            <element signature="e#7244#7333#0" />
+            <element signature="e#7437#7694#0" />
+            <element signature="e#8346#8720#0" />
+            <element signature="e#8463#8720#0" />
+            <element signature="e#8514#8585#0" />
+            <element signature="e#8652#8720#0" />
+            <element signature="e#8739#9466#0" />
+            <element signature="e#8771#9415#0" />
+            <element signature="e#8907#9323#0" />
+            <element signature="e#9527#9568#0" />
+            <element signature="e#9602#9656#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/tuning.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="97" column="72" lean-forward="true" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
         </state>
       </provider>
     </entry>

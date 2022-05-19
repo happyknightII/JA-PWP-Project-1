@@ -126,7 +126,7 @@ def annotation():
                         elif abs(turnRate) < 1:
                             turnRate = 0
                         robot.enable()
-                        robot.drive_raw(settings["speed"], turnRate)
+                        robot.drive_raw(-settings["speed"], turnRate)
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
 
                 frame = cv2.imencode('.jpg', img)[1].tobytes()

@@ -25,6 +25,7 @@ class Robot:
             self.motors[0].set_power(left)
         else:
             self.motors[0].set_power(0)
+
         if abs(right) > 0.1:
             self.motors[1].set_power(right)
         else:

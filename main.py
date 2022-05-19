@@ -126,6 +126,7 @@ def annotation():
                             turnRate = 0
                         robot.enable()
                         robot.drive_raw(0.5, turnRate)
+                        print(turnRate)
                     del leftX
                     del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
@@ -232,6 +233,7 @@ def change_parameters():
 @app.route('/control')
 def control():
     global controlMode
+
     if 'command' not in request.args:
         if 'mode' not in request.args:
             return "Try using 'Auto', 'Forward', or 'Turn'"

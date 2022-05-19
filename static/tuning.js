@@ -108,17 +108,17 @@ $(function() {
         }
     });
     $('a#autonomousButton').on('click', function(e) {
-        e.preventDefault()
+        e.preventDefault();
         fetch('/control?mode=True');
         return false;
     });
     $('a#manualButton').on('click', function(e) {
-        e.preventDefault()
+        e.preventDefault();
         fetch('/control?mode=False');
         return false;
     });
     $('a#saveButton').on('click', function(e) {
-        e.preventDefault()
+        e.preventDefault();
         fetch(window.saveURL);
         return false;
     });

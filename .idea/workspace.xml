@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38f30f59-3bc4-43f9-bb54-395e2c0688a9" name="Default Changelist" comment="tries to fix things">
-      <change afterPath="$PROJECT_DIR$/notUsed/rangeSlider.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/JA-PWP-Project-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JA-PWP-Project-1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Not Used/DummyLight.py" beforeDir="false" afterPath="$PROJECT_DIR$/notUsed/DummyLight.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Not Used/DummyRobot.py" beforeDir="false" afterPath="$PROJECT_DIR$/notUsed/DummyRobot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Not Used/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/notUsed/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Not Used/Links" beforeDir="false" afterPath="$PROJECT_DIR$/notUsed/Links" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/tuning.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/tuning.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/tuning.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/tuning.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tuning.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tuning.html" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/venv/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +13,22 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="JA-PWP-Project-1" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,6 +130,18 @@
       <recent name="C:\Users\c\Documents\GitHub\JA-PWP-Project-1\Not Used" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="JA-PWP-Project-1" />
@@ -154,7 +170,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -305,7 +321,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -324,7 +347,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Check if opencv works" />
@@ -333,16 +355,8 @@
     <option name="LAST_COMMIT_MESSAGE" value="tries to fix things" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GUI.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/GUI.java" />
+    <entry file="file://$PROJECT_DIR$/templates/base.html" />
     <entry file="file://$PROJECT_DIR$/Motor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -350,13 +364,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style.css" />
     <entry file="file://$PROJECT_DIR$/templates/tuning.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -391,13 +399,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script.js" />
     <entry file="file://$PROJECT_DIR$/templates/saveButton.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -414,52 +416,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
+        <state relative-caret-position="335">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
           <folding>
-            <element signature="e#466#888#0" />
-            <element signature="e#549#860#0" />
-            <element signature="e#556#843#0" />
-            <element signature="e#909#1191#0" />
-            <element signature="e#945#963#0" />
-            <element signature="e#999#1118#0" />
-            <element signature="e#1032#1118#0" />
-            <element signature="e#1149#1191#0" />
-            <element signature="e#1296#1380#0" />
-            <element signature="e#2551#2895#0" />
-            <element signature="e#2848#2895#0" />
-            <element signature="e#2984#3329#0" />
-            <element signature="e#3281#3329#0" />
-            <element signature="e#3419#4318#0" />
-            <element signature="e#3796#4249#0" />
-            <element signature="e#4492#4569#0" />
-            <element signature="e#4782#6229#0" />
-            <element signature="e#4810#6137#0" />
-            <element signature="e#4865#6137#0" />
-            <element signature="e#4939#6137#0" />
-            <element signature="e#5008#6089#0" />
-            <element signature="e#5993#6070#0" />
-            <element signature="e#6273#6310#0" />
-            <element signature="e#6359#7219#0" />
-            <element signature="e#6387#7127#0" />
-            <element signature="e#6442#7127#0" />
-            <element signature="e#6514#7127#0" />
-            <element signature="e#6622#7079#0" />
-            <element signature="e#6983#7060#0" />
-            <element signature="e#7265#7400#0" />
-            <element signature="e#7284#7373#0" />
-            <element signature="e#7451#7601#0" />
-            <element signature="e#7470#7574#0" />
-            <element signature="e#7671#8210#0" />
-            <element signature="e#8255#9442#0" />
-            <element signature="e#8320#8696#0" />
-            <element signature="e#8437#8696#0" />
-            <element signature="e#8489#8560#0" />
-            <element signature="e#8628#8696#0" />
-            <element signature="e#8715#9442#0" />
-            <element signature="e#8747#9391#0" />
-            <element signature="e#8883#9299#0" />
-            <element signature="e#9503#9544#0" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

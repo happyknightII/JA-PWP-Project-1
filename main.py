@@ -122,7 +122,7 @@ def annotation():
                         error = (center - img.shape[1] / 2 + settings["offsetPixels"])
                         if (leftX < img.shape[0] / 2 and rightX < img.shape[0] / 2) or \
                                 (leftX > img.shape[0] / 2 and rightX <> img.shape[0] / 2):
-                            error *= -1
+                            error *= -0.1
                         turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
                         if abs(turnRate) > settings["maxTurnRate"]:
                             turnRate = signum(turnRate) * settings["maxTurnRate"]

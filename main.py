@@ -126,7 +126,6 @@ def annotation():
                             turnRate = 0
                         robot.enable()
                         robot.drive_raw(0.5, turnRate)
-                        print(turnRate)
                     del leftX
                     del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))

@@ -1,56 +1,125 @@
-var log = document.getElementById("log");
 
-setInterval(() => {
-    fetch(window.logPageURL)
-        .then(response => {
-            response.text().then(t => {log.innerHTML = t})
-        });
-}, 500);
-
-// Update the current slider value (each time you drag the slider handle)
-document.getElementById("hh").oninput = function() {
-  document.getElementById("hhText").innerHTML = this.value;
-  $.getJSON('/thresholdparameters?hh=' + document.getElementById('hh').value, function(data) {});
-}
-document.getElementById("sh").oninput = function() {
-  document.getElementById("shText").innerHTML = this.value;
-  $.getJSON('/thresholdparameters?sh=' + document.getElementById('sh').value, function(data) {});
-}
-document.getElementById("vh").oninput = function() {
-  document.getElementById("vhText").innerHTML = this.value;
-  $.getJSON('/thresholdparameters?vh=' + document.getElementById('vh').value, function(data) {});
-}
-document.getElementById("hl").oninput = function() {
-  document.getElementById("hlText").innerHTML = this.value;
-  $.getJSON('/thresholdparameters?hl=' + document.getElementById('hl').value, function(data) {});
-}
-document.getElementById("sl").oninput = function() {
-  document.getElementById("slText").innerHTML = this.value;
-  $.getJSON('/thresholdparameters?sl=' + document.getElementById('sl').value, function(data) {});
-}
-document.getElementById("vl").oninput = function() {
-  document.getElementById("vlText").innerHTML = this.value;
-  $.getJSON('/thresholdparameters?vl=' + document.getElementById('vl').value, function(data) {});
-}
-
-function load() {
-
-    fetch(window.hsvFilterURL)
+$(function() {
+    fetch(window.inputsURL)
         .then(response => {
             response.text().then(text => {
                 const t = text.split(" ");
                 document.getElementById("hhText").innerHTML = t[0];
-                document.getElementById("hh").value = t[0];
-                document.getElementById("shText").innerHTML = t[1];
-                document.getElementById("sh").value = t[1];
-                document.getElementById("vhText").innerHTML = t[2];
-                document.getElementById("vh").value = t[2];
                 document.getElementById("hlText").innerHTML = t[3];
-                document.getElementById("hl").value = t[3];
+                $( "#sliderHue" ).slider( "option", "values", [t[3], t[0]] );
+
+                document.getElementById("shText").value = t[1];
                 document.getElementById("slText").innerHTML = t[4];
-                document.getElementById("sl").value = t[4];
+                $( "#sliderSaturation" ).slider( "option", "values", [t[4], t[1]] );
+
+                document.getElementById("vhText").innerHTML = t[2];
                 document.getElementById("vlText").innerHTML = t[5];
-                document.getElementById("vl").value = t[5];
+                $( "#sliderValue" ).slider( "option", "values", [t[5], t[2]] );
+
+                document.getElementById("kpText").innerHTML = t[6];
+                $( "#sliderKP" ).slider( "option", "value",  t[6]);
+
+                document.getElementById("kfText").innerHTML = t[7];
+                $( "#sliderKF" ).slider( "option", "value",  t[7]);
+
+                document.getElementById("maxTurnText").innerHTML = t[8];
+                $( "#sliderMaxTurn" ).slider( "option", "value",  t[8]);
+
+                document.getElementById("offsetText").innerHTML = t[9];
+                $( "#sliderOffset" ).slider( "option", "value",  t[9]);
             })
         });
-}
+
+    $( "#sliderHue" ).slider({
+        range: true,
+        min: 0,
+        max: 255,
+        values: [ 55, 200 ],
+        slide: function( event, ui ) {
+            document.getElementById("hlText").innerHTML = ui.values[ 0 ];
+            document.getElementById("hhText").innerHTML = ui.values[ 1 ];
+            fetch(window.parametersURL + "?hl=" + ui.values[ 0 ] + "&hh=" + ui.values[ 1 ])
+        }
+    });
+    $( "#sliderSaturation" ).slider({
+        range: true,
+        min: 0,
+        max: 255,
+        values: [ 55, 200 ],
+        slide: function( event, ui ) {
+            document.getElementById("slText").innerHTML = ui.values[ 0 ];
+            document.getElementById("shText").innerHTML = ui.values[ 1 ];
+            fetch(window.parametersURL + "?sl=" + ui.values[ 0 ] + "&sh=" + ui.values[ 1 ])
+        }
+    });
+    $( "#sliderValue" ).slider({
+        range: true,
+        min: 0,
+        max: 255,
+        values: [ 55, 200 ],
+        slide: function( event, ui ) {
+            document.getElementById("vlText").innerHTML = ui.values[ 0 ];
+            document.getElementById("vhText").innerHTML = ui.values[ 1 ];
+            fetch(window.parametersURL + "?vl=" + ui.values[ 0 ] + "&vh=" + ui.values[ 1 ])
+        }
+    });
+    $( "#sliderKP" ).slider({
+        orientation: "horizontal",
+        min: -0.5,
+        max: 0.5,
+        step: 0.001,
+        values: 0.25,
+        slide: function( event, ui ) {
+            document.getElementById("kpText").innerHTML = ui.value;
+            fetch(window.parametersURL + "?kp=" + ui.value)
+        }
+    });
+    $( "#sliderKF" ).slider({
+        orientation: "horizontal",
+        min: -0.5,
+        max: 0.5,
+        step: 0.001,
+        value: 0,
+        slide: function( event, ui ) {
+            document.getElementById("kfText").innerHTML = ui.value;
+            fetch(window.parametersURL + "?kf=" + ui.value)
+        }
+    });
+    $( "#sliderMaxTurn" ).slider({
+        orientation: "horizontal",
+        min: -0.5,
+        max: 0.5,
+        step: 0.001,
+        value: 0,
+        slide: function( event, ui ) {
+            document.getElementById("maxTurnText").innerHTML = ui.value;
+            fetch(window.parametersURL + "?kf=" + ui.value)
+        }
+    });
+    $( "#sliderOffset" ).slider({
+        orientation: "horizontal",
+        min: -500,
+        max: 500,
+        step: 1,
+        value: 0,
+        slide: function( event, ui ) {
+            document.getElementById("offsetText").innerHTML = ui.value;
+            fetch(window.parametersURL + "?kf=" + ui.value)
+        }
+    });
+    $('a#autonomousButton').on('click', function(e) {
+        e.preventDefault()
+        fetch('/control?mode=True');
+        return false;
+    });
+    $('a#manualButton').on('click', function(e) {
+        e.preventDefault()
+        fetch('/control?mode=False');
+        return false;
+    });
+    $('a#saveButton').on('click', function(e) {
+        e.preventDefault()
+        fetch(window.saveURL);
+        return false;
+    });
+});

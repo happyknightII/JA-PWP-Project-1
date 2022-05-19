@@ -1,5 +1,5 @@
 # Dummy version of Robot for testing purposes]
-from DummyLight import LightStrip
+from notUsed.DummyLight import LightStrip
 
 
 class Robot:

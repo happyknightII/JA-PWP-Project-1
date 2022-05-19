@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import time
 import json
-from Robot import Robot
+from notUsed.DummyRobot import Robot
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -14,17 +14,32 @@ robot = Robot()
 piCamera = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_COMPLEX
 controlMode = False
-with open("settings.json") as settingsFile:
-    settings = json.load(settingsFile)
+settings = {}
+
+
+def signum(num):
+    if num != 0:
+        return abs(num) / num
+    else:
+        return 0
+
+
+@app.route("/reset")
+def load_settings():
+    global settings
+
+    with open("settings.json") as settingsFile:
+        settings = json.load(settingsFile)
 
 
 @app.route("/save")
 def save_settings():
     print('Settings saved')
     with open("settings.json", "w") as write_file:
-        data = {"kPTurn": settings["kPTurn"],
+        data = {"maxFrameRate": settings["maxFrameRate"],
+                "kPTurn": settings["kPTurn"],
+                "kFTurn": settings["kFTurn"],
                 "maxTurnRate": settings["maxTurnRate"],
-                "maxFrameRate": settings["maxFrameRate"],
                 "offsetPixels": settings["offsetPixels"],
                 "hsvHigh": settings["hsvHigh"],
                 "hsvLow": settings["hsvLow"]}
@@ -103,13 +118,14 @@ def annotation():
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
                     if controlMode:
-                        turnRate = settings["kPTurn"] * (center - img.shape[1] / 2 + settings["offsetPixels"])
+                        turnRate = settings["kPTurn"] * (center - img.shape[1] / 2 + settings["offsetPixels"])\
+                                   + signum(turnRate) * settings["kFTurn"]
                         if abs(turnRate) > settings["maxTurnRate"]:
-                            turnRate = abs(turnRate) / turnRate * settings["maxTurnRate"]
+                            turnRate = signum(turnRate) * settings["maxTurnRate"]
                         elif abs(turnRate) < 0.5:
                             turnRate = 0
                         robot.enable()
-                        robot.drive_raw(0.2, turnRate)
+                        robot.drive_raw(0.5, turnRate)
                     del leftX
                     del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
@@ -185,16 +201,17 @@ def log_page():
     return Response(gen())
 
 
-@app.route('/hsvFilter')
-def hsv_filter():
-
+@app.route('/getParameters')
+def get_parameters():
     def gen():
-        yield " ".join(str(e) for e in settings["hsvHigh"]) + " " + " ".join(str(e) for e in settings["hsvLow"])
+        yield " ".join(str(e) for e in settings["hsvHigh"]) + " " \
+              + " ".join(str(e) for e in settings["hsvLow"]) + \
+              f' {settings["kPTurn"]} {settings["kFTurn"]} {settings["maxTurnRate"]} {settings["offsetPixels"]}'
     return Response(gen())
 
 
-@app.route('/thresholdparameters')
-def threshold_parameters():
+@app.route('/changeParameters')
+def change_parameters():
     if 'hh' in request.args:
         settings["hsvHigh"][0] = int(request.args['hh'])
     if 'sh' in request.args:
@@ -253,4 +270,5 @@ def save_settings_page():
 
 
 if __name__ == '__main__':
+    load_settings()
     app.run(host="0.0.0.0", port=8000)

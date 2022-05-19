@@ -5,6 +5,7 @@
     <title>Tuning</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='tuning.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
 <body>
     <table>
@@ -23,75 +24,132 @@
         <tr>
             <td class="quadrantSmall">
                 <form id="controlQuadrant" class="secondQuadrant">
-                    <div class="scroller">
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="slidecontainer">
-                                        <label>High Hue</label>
-                                        <input type="range" min="0" max="255" value="150" class="slider" id="hh">
-                                    </div>
-                                    <label id="hhText">0</label>
-                                </td>
-                                <td>
-                                    <label>High Saturation</label>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="0" max="255" value="150" class="slider" id="sh">
-                                    </div>
-                                    <label id="shText">0</label>
-                                </td>
-                                <td>
-                                    <label>High Value</label>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="0" max="255" value="150" class="slider" id="vh">
-                                    </div>
-                                    <label id="vhText">0</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>Low Hue</label>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="0" max="255" value="150" class="slider" id="hl">
-                                    </div>
-                                    <label id="hlText">0</label>
-                                </td>
-                                <td>
-                                    <label>Low Saturation</label>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="0" max="255" value="150" class="slider" id="sl">
-                                    </div>
-                                    <label id="slText">0</label>
-                                </td>
-                                <td>
-                                    <label>Low Value</label>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="0" max="255" value="150" class="slider" id="vl">
-                                    </div>
-                                    <label id="vlText">0</label>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <label >KP Turn: </label>
+                            </td>
+                            <td colspan="9">
+                                <div id="sliderKP"></div>
+                            </td>
+                            <td>
+                                <label id="kpText">0</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>KF Turn: </label>
+                            </td>
+                            <td colspan="9">
+                                <div id="sliderKF"></div>
+                            </td>
+                            <td>
+                                <label id="kfText">0</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Max Turn: </label>
+                            </td>
+                            <td colspan="9">
+                                <div id="sliderMaxTurn"></div>
+                            </td>
+                            <td>
+                                <label id="maxTurnText" >0</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Offset: </label>
+                            </td>
+                            <td colspan="9">
+                                <div id="sliderOffset"></div>
+                            </td>
+                            <td>
+                                <label id="offsetText">0</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <a href=# id=autonomousButton><button>Auto</button></a>
+                            </td>
+                            <td colspan="3">
+                                <a href=# id=manualButton><button>Manual</button></a>
+                            </td>
+                            <td colspan="5">
+                                <a href=# id=saveButton><button>Save</button></a>
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </td>
             <td class="quadrantSmall">
-                <div id="logQuadrant" class="secondQuadrant">
-                    <div id="scroller">
-                            <h1>Log:</h1>
-                        <p id="log">Here will be log</p>
-                    </div>
-
-                </div>
+                <form id="logQuadrant" class="secondQuadrant">
+                    <table id="controlGrid">
+                            <tr>
+                                <td colspan="9">
+                                    <h1>Hue</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="hlText">0</label>
+                                </td>
+                                <td colspan="7">
+                                    <div id="sliderHue"></div>
+                                </td>
+                                <td>
+                                    <label id="hhText">255</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="9">
+                                    <h1>Saturation</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="slText">0</label>
+                                </td>
+                                <td colspan="7">
+                                    <div id="sliderSaturation"></div>
+                                </td>
+                                <td>
+                                    <label id="shText">255</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="9">
+                                    <h1>Value</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="vlText">0</label>
+                                </td>
+                                <td colspan="7">
+                                    <div id="sliderValue"></div>
+                                </td>
+                                <td>
+                                    <label id="vhText">255</label>
+                                </td>
+                            </tr>
+                            <tr><td colspan="9"></td></tr>
+                        </table>
+                </form>
             </td>
         </tr>
     </table>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
     <script src="{{url_for('static', filename='tuning.js')}}"></script>
     <script>
-        window.logPageURL = "{{url_for('log_page')}}";
-        window.hsvFilterURL = "{{url_for('hsv_filter')}}";
-        window.onload = load;
+        window.inputsURL = "{{url_for('get_parameters')}}";
+        window.parametersURL = "{{url_for('change_parameters')}}";
+        window.saveURL = "{{url_for('save_settings')}}";
     </script>
 </body>
 </html>

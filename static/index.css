@@ -29,11 +29,10 @@ table {
     width: 100%;
 }
 button, input{
-background: #D89E00;
+    background: #D89E00;
     height: 95%;
     width: 95%;
     font-size:30px
-
 }
 #streamQuadrant {
     display: flex;

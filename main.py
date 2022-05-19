@@ -236,10 +236,10 @@ def control():
         if 'mode' not in request.args:
             return "Try using 'Auto', 'Forward', or 'Turn'"
         else:
-            if request.args['value'] == "True":
+            if request.args['mode'] == "True":
                 controlMode = True
                 return "Switched to autonomous mode"
-            elif request.args['value'] == "False":
+            elif request.args['mode'] == "False":
                 controlMode = False
                 return "Switched to manual mode"
     else:

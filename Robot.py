@@ -24,7 +24,7 @@ class Robot:
 
     def drive_raw(self, forward, turn):
         left = forward - turn
-        right = forward - turn
+        right = forward + turn
         if abs(left) > 2:
             self.motors[0].set_power(left)
         else:

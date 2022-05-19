@@ -70,12 +70,21 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
-                                <a href=# id=autonomousButton><button>Auto</button></a>
+                            <td>
+                                <label>Speed: </label>
                             </td>
-                            <td colspan="3">
-                                <a href=# id=manualButton><button>Manual</button></a>
+                            <td colspan="9">
+                                <div id="sliderSpeed"></div>
                             </td>
+                            <td>
+                                <label id="speedText">0</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <a href=# id=resetButton><button>Reset</button></a>
+                            </td>
+                            <td></td>
                             <td colspan="5">
                                 <a href=# id=saveButton><button>Save</button></a>
                             </td>
@@ -144,12 +153,14 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
     <script src="{{url_for('static', filename='tuning.js')}}"></script>
     <script>
         window.inputsURL = "{{url_for('get_parameters')}}";
         window.parametersURL = "{{url_for('change_parameters')}}";
         window.saveURL = "{{url_for('save_settings')}}";
+        window.resetURL = "{{url_for('load_settings')}}";
     </script>
 </body>
 </html>

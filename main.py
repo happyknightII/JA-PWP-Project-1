@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import time
 import json
-from Robot import Robot
+from notUsed.DummyRobot import Robot
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -37,6 +37,7 @@ def save_settings():
     print('Settings saved')
     with open("settings.json", "w") as write_file:
         data = {"maxFrameRate": settings["maxFrameRate"],
+                "speed": settings["speed"],
                 "kPTurn": settings["kPTurn"],
                 "kFTurn": settings["kFTurn"],
                 "maxTurnRate": settings["maxTurnRate"],
@@ -122,10 +123,10 @@ def annotation():
                         turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
                         if abs(turnRate) > settings["maxTurnRate"]:
                             turnRate = signum(turnRate) * settings["maxTurnRate"]
-                        elif abs(turnRate) < 0.5:
+                        elif abs(turnRate) < 1:
                             turnRate = 0
                         robot.enable()
-                        robot.drive_raw(0.5, turnRate)
+                        robot.drive_raw(settings["speed"], turnRate)
                     del leftX
                     del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
@@ -206,7 +207,7 @@ def get_parameters():
     def gen():
         yield " ".join(str(e) for e in settings["hsvHigh"]) + " " \
               + " ".join(str(e) for e in settings["hsvLow"]) + \
-              f' {settings["kPTurn"]} {settings["kFTurn"]} {settings["maxTurnRate"]} {settings["offsetPixels"]}'
+              f' {settings["kPTurn"]} {settings["kFTurn"]} {settings["maxTurnRate"]} {settings["offsetPixels"]} {settings["speed"]}'
     return Response(gen())
 
 
@@ -225,6 +226,17 @@ def change_parameters():
         settings["hsvLow"][1] = int(request.args['sl'])
     if 'vl' in request.args:
         settings["hsvLow"][2] = int(request.args['vl'])
+
+    if 'speed' in request.args:
+        settings["speed"] = int(request.args['speed'])
+    if 'kp' in request.args:
+        settings["kPTurn"] = float(request.args['kp'])
+    if 'kf' in request.args:
+        settings["kFTurn"] = float(request.args['kf'])
+    if 'maxTurn' in request.args:
+        settings["maxTurnSpeed"] = int(request.args['maxTurn'])
+    if 'offset' in request.args:
+        settings["offsetPixels"] = int(request.args['offset'])
 
     return "arguments saved"
 

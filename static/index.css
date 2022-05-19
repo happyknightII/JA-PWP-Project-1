@@ -9,6 +9,8 @@ html, body {
     border: 6px solid ;
 }
 .secondQuadrant{
+    display:flex;
+    align-content: center;
     height: 100%;
     width: 100%;
     border-radius:20px;
@@ -21,7 +23,7 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
-table {
+table{
     align-content: center;
     border-collapse: collapse;
     table-layout: fixed;
@@ -33,28 +35,19 @@ button, input{
     height: 95%;
     width: 95%;
     font-size:30px
+    color: #F2F2F2;
 }
+
 #streamQuadrant {
-    display: flex;
-    align-items: center;
     background: #E21B3C;
 }
 #blankQuadrant{
-    display: flex;
-    align-items: center;
     background: #1368CE;
 }
 #controlQuadrant {
-    display:flex;
-    align-content: center;
-
     background: #FFA602;
-}
-#scroller {
-    height: 100%;
-    width: 100%;
-    overflow: scroll;
 }
 #logQuadrant {
     background: #26890C;
+    overflow: scroll;
 }

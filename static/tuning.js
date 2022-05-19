@@ -1,5 +1,4 @@
-
-$(function() {
+function loadValues() {
     fetch(window.inputsURL)
         .then(response => {
             response.text().then(text => {
@@ -27,9 +26,13 @@ $(function() {
 
                 document.getElementById("offsetText").innerHTML = t[9];
                 $( "#sliderOffset" ).slider( "option", "value",  t[9]);
-            })
-        });
 
+                document.getElementById("speedText").innerHTML = t[10];
+                $( "#sliderSpeed" ).slider( "option", "value",  t[10]);
+            })
+    });
+}
+$(function() {
     $( "#sliderHue" ).slider({
         range: true,
         min: 0,
@@ -76,9 +79,9 @@ $(function() {
     });
     $( "#sliderKF" ).slider({
         orientation: "horizontal",
-        min: -0.5,
-        max: 0.5,
-        step: 0.001,
+        min: -20,
+        max: 20,
+        step: 0.1,
         value: 0,
         slide: function( event, ui ) {
             document.getElementById("kfText").innerHTML = ui.value;
@@ -87,34 +90,41 @@ $(function() {
     });
     $( "#sliderMaxTurn" ).slider({
         orientation: "horizontal",
-        min: -0.5,
-        max: 0.5,
-        step: 0.001,
+        min: -50,
+        max: 50,
+        step: 1,
         value: 0,
         slide: function( event, ui ) {
             document.getElementById("maxTurnText").innerHTML = ui.value;
-            fetch(window.parametersURL + "?kf=" + ui.value)
+            fetch(window.parametersURL + "?maxTurn=" + ui.value)
         }
     });
     $( "#sliderOffset" ).slider({
         orientation: "horizontal",
-        min: -500,
-        max: 500,
+        min: -200,
+        max: 200,
         step: 1,
         value: 0,
         slide: function( event, ui ) {
             document.getElementById("offsetText").innerHTML = ui.value;
-            fetch(window.parametersURL + "?kf=" + ui.value)
+            fetch(window.parametersURL + "?offset=" + ui.value)
         }
     });
-    $('a#autonomousButton').on('click', function(e) {
-        e.preventDefault();
-        fetch('/control?mode=True');
-        return false;
+    $( "#sliderSpeed" ).slider({
+        orientation: "horizontal",
+        min: -70,
+        max: 70,
+        step: 1,
+        value: 0,
+        slide: function( event, ui ) {
+            document.getElementById("speedText").innerHTML = ui.value;
+            fetch(window.parametersURL + "?speed=" + ui.value)
+        }
     });
-    $('a#manualButton').on('click', function(e) {
+    $('a#resetButton').on('click', function(e) {
         e.preventDefault();
-        fetch('/control?mode=False');
+        fetch(window.resetURL);
+        loadValues();
         return false;
     });
     $('a#saveButton').on('click', function(e) {

@@ -1,8 +1,11 @@
 html, body {
     height: 100%;
-    color: #f2f2f2;
-    background: #f2f2f2;
+    color: #1D1D1D;
+    background: #1D1D1D;
     vertical-align: middle
+}
+label, h1 {
+    color: #F2F2F2;
 }
 .quadrantLarge {
     height:60%;
@@ -13,13 +16,11 @@ html, body {
     border: 6px solid ;
 }
 .secondQuadrant{
+    display:flex;
+    align-content: center;
     height: 100%;
     width: 100%;
     border-radius:20px;
-}
-.sidewaysText{
-    writing-mode: tb-rl;
-    transform: rotate(-180deg);
 }
 .ui-slider .ui-slider-handle {
     height: 15px;
@@ -46,23 +47,16 @@ button{
     background: #D89E00;
     height: 95%;
     width: 95%;
-    font-size:30px
-
+    font-size:30px;
+    color: #F2F2F2;
 }
 #streamQuadrant {
-    display: flex;
-    align-items: center;
     background: #E21B3C;
 }
 #blankQuadrant{
-    display: flex;
-    align-items: center;
     background: #1368CE;
 }
 #controlQuadrant {
-    display:flex;
-    align-content: center;
-
     background: #FFA602;
 }
 

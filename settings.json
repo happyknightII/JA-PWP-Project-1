@@ -1,8 +1,9 @@
 {
     "maxFrameRate": 60,
+    "speed": 50,
     "kPTurn": 0.1,
-    "kFTurn": 0.1,
-    "maxTurnRate": 0.3,
+    "kFTurn": 10,
+    "maxTurnRate": 20,
     "offsetPixels": 0,
     "hsvHigh": [
         120,

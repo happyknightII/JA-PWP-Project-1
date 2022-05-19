@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import time
 import json
-from notUsed.DummyRobot import Robot
+from Robot import Robot
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 

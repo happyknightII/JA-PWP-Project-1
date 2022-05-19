@@ -26,7 +26,7 @@ $(function() {
     });
     $('a#leftButton').on('click', function(e) {
         e.preventDefault();
-        fetch'/control?command=Turn&value=-' + document.getElementById('distance').value);
+        fetch('/control?command=Turn&value=-' + document.getElementById('distance').value);
         return false;
     });
     $('a#rightButton').on('click', function(e) {

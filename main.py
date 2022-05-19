@@ -118,8 +118,8 @@ def annotation():
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
                     if controlMode:
-                        turnRate = settings["kPTurn"] * (center - img.shape[1] / 2 + settings["offsetPixels"])\
-                                   + signum(turnRate) * settings["kFTurn"]
+                        error = (center - img.shape[1] / 2 + settings["offsetPixels"])
+                        turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
                         if abs(turnRate) > settings["maxTurnRate"]:
                             turnRate = signum(turnRate) * settings["maxTurnRate"]
                         elif abs(turnRate) < 0.5:

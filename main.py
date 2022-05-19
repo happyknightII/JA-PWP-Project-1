@@ -127,8 +127,6 @@ def annotation():
                             turnRate = 0
                         robot.enable()
                         robot.drive_raw(settings["speed"], turnRate)
-                    del leftX
-                    del rightX
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
 
                 frame = cv2.imencode('.jpg', img)[1].tobytes()
@@ -254,6 +252,7 @@ def control():
                 return "Switched to autonomous mode"
             elif request.args['mode'] == "False":
                 controlMode = False
+                robot.stop()
                 return "Switched to manual mode"
     else:
         if not controlMode:

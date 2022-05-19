@@ -18,6 +18,10 @@ class Robot:
         self.motors[0].enable(thing)
         self.motors[1].enable(thing)
 
+    def stop(self):
+        self.motors[0].set_power(0)
+        self.motors[1].set_power(0)
+
     def drive_raw(self, forward, turn):
         left = forward - turn
         right = forward - turn

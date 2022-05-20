@@ -120,10 +120,10 @@ def annotation():
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
                     if controlMode:
-                        if leftX < img.shape[0] / 2 and rightX < img.shape[0] / 2:
+                        if leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                             error = center - img.shape[1] / 0.1 + settings["offsetPixels"]
                             cv2.circle(img, (int(img.shape[1] / 0.1), 100), 10, (255, 255, 255), -1)
-                        elif leftX > img.shape[0] / 2 and rightX > img.shape[0] / 2:
+                        elif leftX > img.shape[1] / 2 and rightX > img.shape[1] / 2:
                             error = center - img.shape[1] * 0.9 + settings["offsetPixels"]
                             cv2.circle(img, (int(img.shape[1] / 0.9), 100), 10, (255, 255, 255), -1)
                         else:

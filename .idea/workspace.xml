@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38f30f59-3bc4-43f9-bb54-395e2c0688a9" name="Default Changelist" comment="tries to fix things">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="38f30f59-3bc4-43f9-bb54-395e2c0688a9" name="Default Changelist" comment="tries to fix things" />
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,54 +17,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="124" column="41" selection-start-line="124" selection-start-column="41" selection-end-line="124" selection-end-column="41" />
+            <state relative-caret-position="209">
+              <caret line="122" column="102" lean-forward="true" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
               <folding>
-                <element signature="e#386#455#0" />
-                <element signature="e#504#611#0" />
-                <element signature="e#659#1229#0" />
-                <element signature="e#742#1201#0" />
-                <element signature="e#749#1135#0" />
-                <element signature="e#1250#1532#0" />
-                <element signature="e#1286#1304#0" />
-                <element signature="e#1340#1459#0" />
-                <element signature="e#1373#1459#0" />
-                <element signature="e#1490#1532#0" />
-                <element signature="e#1637#1721#0" />
-                <element signature="e#1766#2173#0" />
-                <element signature="e#1794#2081#0" />
-                <element signature="e#1818#2081#0" />
-                <element signature="e#1879#2041#0" />
-                <element signature="e#1949#2022#0" />
-                <element signature="e#2556#2884#0" />
-                <element signature="e#2841#2884#0" />
-                <element signature="e#2965#3294#0" />
-                <element signature="e#3250#3294#0" />
-                <element signature="e#4742#6189#0" />
-                <element signature="e#4770#6097#0" />
-                <element signature="e#4825#6097#0" />
-                <element signature="e#4899#6097#0" />
-                <element signature="e#4968#6049#0" />
-                <element signature="e#5953#6030#0" />
-                <element signature="e#6233#6270#0" />
-                <element signature="e#6319#7179#0" />
-                <element signature="e#6347#7087#0" />
-                <element signature="e#6402#7087#0" />
-                <element signature="e#6474#7087#0" />
-                <element signature="e#6582#7039#0" />
-                <element signature="e#6943#7020#0" />
-                <element signature="e#7225#7360#0" />
-                <element signature="e#7244#7333#0" />
-                <element signature="e#7437#7694#0" />
-                <element signature="e#8346#8720#0" />
-                <element signature="e#8463#8720#0" />
-                <element signature="e#8514#8585#0" />
-                <element signature="e#8652#8720#0" />
-                <element signature="e#8739#9466#0" />
-                <element signature="e#8771#9415#0" />
-                <element signature="e#8907#9323#0" />
-                <element signature="e#9527#9568#0" />
-                <element signature="e#9602#9656#0" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Robot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+            <state relative-caret-position="555">
+              <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -495,64 +449,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Robot.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+        <state relative-caret-position="209">
+          <caret line="122" column="102" lean-forward="true" selection-start-line="122" selection-start-column="102" selection-end-line="122" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/Robot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="124" column="41" selection-start-line="124" selection-start-column="41" selection-end-line="124" selection-end-column="41" />
-          <folding>
-            <element signature="e#386#455#0" />
-            <element signature="e#504#611#0" />
-            <element signature="e#659#1229#0" />
-            <element signature="e#742#1201#0" />
-            <element signature="e#749#1135#0" />
-            <element signature="e#1250#1532#0" />
-            <element signature="e#1286#1304#0" />
-            <element signature="e#1340#1459#0" />
-            <element signature="e#1373#1459#0" />
-            <element signature="e#1490#1532#0" />
-            <element signature="e#1637#1721#0" />
-            <element signature="e#1766#2173#0" />
-            <element signature="e#1794#2081#0" />
-            <element signature="e#1818#2081#0" />
-            <element signature="e#1879#2041#0" />
-            <element signature="e#1949#2022#0" />
-            <element signature="e#2556#2884#0" />
-            <element signature="e#2841#2884#0" />
-            <element signature="e#2965#3294#0" />
-            <element signature="e#3250#3294#0" />
-            <element signature="e#4742#6189#0" />
-            <element signature="e#4770#6097#0" />
-            <element signature="e#4825#6097#0" />
-            <element signature="e#4899#6097#0" />
-            <element signature="e#4968#6049#0" />
-            <element signature="e#5953#6030#0" />
-            <element signature="e#6233#6270#0" />
-            <element signature="e#6319#7179#0" />
-            <element signature="e#6347#7087#0" />
-            <element signature="e#6402#7087#0" />
-            <element signature="e#6474#7087#0" />
-            <element signature="e#6582#7039#0" />
-            <element signature="e#6943#7020#0" />
-            <element signature="e#7225#7360#0" />
-            <element signature="e#7244#7333#0" />
-            <element signature="e#7437#7694#0" />
-            <element signature="e#8346#8720#0" />
-            <element signature="e#8463#8720#0" />
-            <element signature="e#8514#8585#0" />
-            <element signature="e#8652#8720#0" />
-            <element signature="e#8739#9466#0" />
-            <element signature="e#8771#9415#0" />
-            <element signature="e#8907#9323#0" />
-            <element signature="e#9527#9568#0" />
-            <element signature="e#9602#9656#0" />
-          </folding>
+        <state relative-caret-position="555">
+          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
         </state>
       </provider>
     </entry>

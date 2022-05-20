@@ -120,12 +120,12 @@ def annotation():
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
                     if controlMode:
+                        cv2.line(img, (0, img.shape[1] / 4), (img.shape[1], img.shape[1] / 4), (0, 0, 255))
+                        cv2.line(img, (0, img.shape[1] * 3 / 4), (img.shape[1], img.shape[1] * 3 / 4), (0, 0, 255))
                         if leftX < img.shape[0] / 2 and rightX < img.shape[0] / 2:
-                            error = center - img.shape[1] * 3/ 4 + settings["offsetPixels"]
-                            cv2.line(img, (0, img.shape[1] / 4), (img.shape[1], img.shape[1] / 4), (0, 0, 255))
+                            error = center - img.shape[1] * 0.9 + settings["offsetPixels"]
                         elif leftX > img.shape[0] / 2 and rightX > img.shape[0] / 2:
-                            error = center - img.shape[1] / 4 + settings["offsetPixels"] * 3 / 4
-                            cv2.line(img, (0, img.shape[1] * 3 / 4), (img.shape[1], img.shape[1] * 3 / 4), (0, 0, 255))
+                            error = center - img.shape[1] / 0.1 + settings["offsetPixels"]
                         else:
                             error = center - img.shape[1] / 2 + settings["offsetPixels"]
                         turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]

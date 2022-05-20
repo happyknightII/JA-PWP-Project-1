@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import time
 import json
-from Robot import Robot
+from notUsed.DummyRobot import Robot
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -30,7 +30,8 @@ def load_settings():
 
     with open("settings.json") as settingsFile:
         settings = json.load(settingsFile)
-
+        
+    return "Loaded settings"
 
 @app.route("/save")
 def save_settings():

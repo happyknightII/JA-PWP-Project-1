@@ -121,9 +121,9 @@ def annotation():
 
                     if controlMode:
                         if leftX < img.shape[0] / 2 and rightX < img.shape[0] / 2:
-                            error = center - img.shape[1] * 0.9 + settings["offsetPixels"]
-                        elif leftX > img.shape[0] / 2 and rightX > img.shape[0] / 2:
                             error = center - img.shape[1] / 0.1 + settings["offsetPixels"]
+                        elif leftX > img.shape[0] / 2 and rightX > img.shape[0] / 2:
+                            error = center - img.shape[1] * 0.9 + settings["offsetPixels"]
                         else:
                             error = center - img.shape[1] / 2 + settings["offsetPixels"]
                         turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]

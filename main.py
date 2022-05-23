@@ -91,9 +91,9 @@ def streamer():
 
 @app.route('/annotation')
 def annotation():
-    global controlMode
-
     def stream(camera):
+        global controlMode
+
         while True:
             ret, img = camera.read()
             leftX = None
@@ -120,16 +120,22 @@ def annotation():
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
 
                     if controlMode:
+                        error = center + settings["offsetPixels"]
                         if leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
-                            error = center - img.shape[1] * 0.1 + settings["offsetPixels"]
+                            error -= img.shape[1] * 0.1
                             cv2.circle(img, (int(img.shape[1] / 0.1), 100), 100, (255, 255, 255), -1)
                             print("left turn")
                         elif leftX > img.shape[1] / 2 and rightX > img.shape[1] / 2:
                             cv2.circle(img, (int(img.shape[1] / 0.9), 100), 100, (255, 255, 255), -1)
-                            error = center - img.shape[1] * 0.9 + settings["offsetPixels"]
+                            error -= img.shape[1] * 0.9
                             print("right turn")
+                        elif img.shape[1] * 0.4 < leftX < img.shape[1] / 2 < rightX < img.shape[1] * 0.6:
+                            controlMode = False
+                            error = 0
+                            print("stop")
+
                         else:
-                            error = center - img.shape[1] / 2 + settings["offsetPixels"]
+                            error -= img.shape[1] / 2
                         turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
                         if abs(turnRate) > settings["maxTurnRate"]:
                             turnRate = signum(turnRate) * settings["maxTurnRate"]

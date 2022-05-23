@@ -94,6 +94,7 @@ def annotation():
     def stream(camera):
         global controlMode
 
+        stopFirstTime = 0
         while True:
             ret, img = camera.read()
             leftX = None
@@ -122,9 +123,13 @@ def annotation():
                     if controlMode:
                         error = center + settings["offsetPixels"]
                         if img.shape[1] * 0.4 and rightX < img.shape[1] * 0.6:
-                            controlMode = False
-                            error = 0
-                            print("stop")
+                            if stopFirstTime == 0:
+                                stopFirstTime = time.time()
+                            elif stopFirstTime - time.time() > 1:
+                                stopFirstTime = 0
+                                controlMode = False
+                                error = 0
+                                print("stop")
                         elif leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                             error -= img.shape[1] * 0.1
                             cv2.circle(img, (int(img.shape[1] / 0.1), 100), 100, (255, 255, 255), -1)

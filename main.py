@@ -125,7 +125,8 @@ def annotation():
                         if img.shape[1] * 0.4 and rightX < img.shape[1] * 0.6:
                             if stopFirstTime == 0:
                                 stopFirstTime = time.time()
-                            elif stopFirstTime - time.time() > 0.1:
+                                print("start timer")
+                            elif time.time() - stopFirstTime > 1:
                                 stopFirstTime = 0
                                 controlMode = False
                                 error = 0
@@ -144,7 +145,7 @@ def annotation():
                         else:
                             stopFirstTime = 0
                             error -= img.shape[1] / 2
-                            
+
                         turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
                         if abs(turnRate) > settings["maxTurnRate"]:
                             turnRate = signum(turnRate) * settings["maxTurnRate"]

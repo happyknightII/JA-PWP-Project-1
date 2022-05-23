@@ -107,9 +107,9 @@ $(document).ready(function() {
     });
     $( "#sliderOffset" ).slider({
         orientation: "horizontal",
-        min: -200,
-        max: 200,
-        step: 1,
+        min: 0,
+        max: 1,
+        step: 0.01,
         value: 0,
         slide: function( event, ui ) {
             document.getElementById("offsetText").value = ui.value;

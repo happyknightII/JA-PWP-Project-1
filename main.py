@@ -125,12 +125,12 @@ def annotation():
                     leftX = 0
 
                 if controlMode:
-                    error = center + settings["offsetPixels"]
+                    error = center
                     if img.shape[1] * 0.4 < leftX and rightX < img.shape[1] * 0.6:
                         if stopFirstTime == 0:
                             stopFirstTime = time.time()
                             print("start timer")
-                        elif time.time() - stopFirstTime > 0.25:
+                        elif time.time() - stopFirstTime > settings["offsetPixels"]:
                             stopFirstTime = 0
                             controlMode = False
                             error = 0

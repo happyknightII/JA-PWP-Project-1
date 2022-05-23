@@ -121,7 +121,11 @@ def annotation():
 
                     if controlMode:
                         error = center + settings["offsetPixels"]
-                        if leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
+                        if img.shape[1] * 0.4 and rightX < img.shape[1] * 0.6:
+                            controlMode = False
+                            error = 0
+                            print("stop")
+                        elif leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                             error -= img.shape[1] * 0.1
                             cv2.circle(img, (int(img.shape[1] / 0.1), 100), 100, (255, 255, 255), -1)
                             print("left turn")
@@ -129,10 +133,6 @@ def annotation():
                             cv2.circle(img, (int(img.shape[1] / 0.9), 100), 100, (255, 255, 255), -1)
                             error -= img.shape[1] * 0.9
                             print("right turn")
-                        elif img.shape[1] * 0.4 < leftX < img.shape[1] / 2 < rightX < img.shape[1] * 0.6:
-                            controlMode = False
-                            error = 0
-                            print("stop")
 
                         else:
                             error -= img.shape[1] / 2

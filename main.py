@@ -126,7 +126,7 @@ def annotation():
                             if stopFirstTime == 0:
                                 stopFirstTime = time.time()
                                 print("start timer")
-                            elif time.time() - stopFirstTime > 0.1:
+                            elif time.time() - stopFirstTime > 0.25:
                                 stopFirstTime = 0
                                 controlMode = False
                                 error = 0

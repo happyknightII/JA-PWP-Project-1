@@ -126,7 +126,7 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    if img.shape[1] * 0.4 < leftX and rightX < img.shape[1] * 0.6:
+                    if img.shape[1] * 0.3 < leftX and rightX < img.shape[1] * 0.7:
                         if stopFirstTime == 0:
                             stopFirstTime = time.time()
                             print("start timer")

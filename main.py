@@ -119,43 +119,47 @@ def annotation():
                     cv2.line(img, (leftX, 0), (leftX, img.shape[0]), (255, 192, 203))
                     cv2.line(img, (rightX, 0), (rightX, img.shape[0]), (255, 192, 203))
                     cv2.arrowedLine(img, (center, 100), (center, 200), (0, 255, 0), 5)
+                else:
+                    center = img.shape[1] / 2
+                    rightX = img.shape[1]
+                    leftX = 0
 
+                if controlMode:
+                    error = center + settings["offsetPixels"]
+                    if img.shape[1] * 0.4 < leftX and rightX < img.shape[1] * 0.6:
+                        if stopFirstTime == 0:
+                            stopFirstTime = time.time()
+                            print("start timer")
+                        elif time.time() - stopFirstTime > 0.25:
+                            stopFirstTime = 0
+                            controlMode = False
+                            error = 0
+                            print("stop")
+                    elif leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
+                        error -= img.shape[1] * 0.1
+                        cv2.circle(img, (int(img.shape[1] / 0.1), 100), 100, (255, 255, 255), -1)
+                        stopFirstTime = 0
+                        print("left turn")
+                    elif leftX > img.shape[1] / 2 and rightX > img.shape[1] / 2:
+                        cv2.circle(img, (int(img.shape[1] / 0.9), 100), 100, (255, 255, 255), -1)
+                        error -= img.shape[1] * 0.9
+                        stopFirstTime = 0
+                        print("right turn")
+
+                    else:
+                        stopFirstTime = 0
+                        error -= img.shape[1] / 2
+
+                    turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
+                    if abs(turnRate) > settings["maxTurnRate"]:
+                        turnRate = signum(turnRate) * settings["maxTurnRate"]
+                    elif abs(turnRate) < 1:
+                        turnRate = 0
                     if controlMode:
-                        error = center + settings["offsetPixels"]
-                        if img.shape[1] * 0.4 and rightX < img.shape[1] * 0.6:
-                            if stopFirstTime == 0:
-                                stopFirstTime = time.time()
-                                print("start timer")
-                            elif time.time() - stopFirstTime > 0.25:
-                                stopFirstTime = 0
-                                controlMode = False
-                                error = 0
-                                print("stop")
-                        elif leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
-                            error -= img.shape[1] * 0.1
-                            cv2.circle(img, (int(img.shape[1] / 0.1), 100), 100, (255, 255, 255), -1)
-                            stopFirstTime = 0
-                            print("left turn")
-                        elif leftX > img.shape[1] / 2 and rightX > img.shape[1] / 2:
-                            cv2.circle(img, (int(img.shape[1] / 0.9), 100), 100, (255, 255, 255), -1)
-                            error -= img.shape[1] * 0.9
-                            stopFirstTime = 0
-                            print("right turn")
-
-                        else:
-                            stopFirstTime = 0
-                            error -= img.shape[1] / 2
-
-                        turnRate = settings["kPTurn"] * error + signum(error) * settings["kFTurn"]
-                        if abs(turnRate) > settings["maxTurnRate"]:
-                            turnRate = signum(turnRate) * settings["maxTurnRate"]
-                        elif abs(turnRate) < 1:
-                            turnRate = 0
-                        if controlMode:
-                            robot.enable()
-                            robot.drive_raw(-settings["speed"], turnRate)
-                        else:
-                            robot.stop()
+                        robot.enable()
+                        robot.drive_raw(-settings["speed"], turnRate)
+                    else:
+                        robot.stop()
 
 
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))

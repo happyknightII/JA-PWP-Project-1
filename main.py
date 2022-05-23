@@ -141,8 +141,11 @@ def annotation():
                             turnRate = signum(turnRate) * settings["maxTurnRate"]
                         elif abs(turnRate) < 1:
                             turnRate = 0
-                        robot.enable()
-                        robot.drive_raw(-settings["speed"], turnRate)
+                        if controlMode:
+                            robot.enable()
+                            robot.drive_raw(-settings["speed"], turnRate)
+                        else:
+                            robot.stop()
 
 
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))

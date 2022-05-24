@@ -126,15 +126,20 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    if img.shape[1] * 0.3 < leftX and rightX < img.shape[1] * 0.7:
-                        if stopFirstTime == 0:
-                            stopFirstTime = time.time()
-                            print("start timer")
-                        elif time.time() - stopFirstTime > settings["offsetPixels"]:
-                            stopFirstTime = 0
+                    leftrighterror = 50
+                    if leftX < img.shape[1]/2 < rightX:
+                        if abs(rightX-leftX) < leftrighterror:
                             controlMode = False
-                            error = 0
                             print("stop")
+                    # if img.shape[1] * 0.3 < leftX and rightX < img.shape[1] * 0.7:
+                    #     if stopFirstTime == 0:
+                    #         stopFirstTime = time.time()
+                    #         print("start timer")
+                    #     elif time.time() - stopFirstTime > settings["offsetPixels"]:
+                    #         stopFirstTime = 0
+                    #         controlMode = False
+                    #         error = 0
+                    #         print("stop")
                     elif leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                         error -= img.shape[1] * 0.1
                         cv2.circle(img, (int(img.shape[1] / 0.1), 100), 100, (255, 255, 255), -1)

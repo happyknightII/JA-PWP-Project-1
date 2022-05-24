@@ -126,7 +126,7 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    leftrighterror = 25
+                    leftrighterror = 350
                     if leftX < img.shape[1]/2 < rightX:
                         print(abs(rightX-leftX))
                         if abs(rightX-leftX) < leftrighterror:

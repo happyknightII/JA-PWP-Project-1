@@ -126,7 +126,7 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    leftrighterror = 350
+                    leftrighterror = 300
 
                     # if img.shape[1] * 0.3 < leftX and rightX < img.shape[1] * 0.7:
                     #     if stopFirstTime == 0:

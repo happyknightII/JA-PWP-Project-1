@@ -163,7 +163,7 @@ def annotation():
                         if stopping:
                             if time.time() - finalTime > 0.5:
                                 controlMode = False
-                                robot.drive_raw(-settings["speed"], 0)
+                            robot.drive_raw(-settings["speed"], 0)
                         else:
                             robot.drive_raw(-settings["speed"], turnRate)
                     else:

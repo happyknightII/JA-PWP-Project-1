@@ -95,6 +95,9 @@ def annotation():
         global controlMode
 
         stopFirstTime = 0
+        stopping = False
+        finalTime = 0
+        robot.enable()
         while True:
             ret, img = camera.read()
             leftX = None
@@ -126,7 +129,7 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    leftrighterror = 400
+                    leftrighterror = 600
                     print(abs(rightX - leftX))
                     if leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                         error -= img.shape[1] * 0.1
@@ -143,7 +146,8 @@ def annotation():
                             if stopFirstTime == 0:
                                 stopFirstTime = time.time()
                             elif time.time() - stopFirstTime > 0.5:
-                                controlMode = False
+                                stopping = True
+                                finalTime = time.time()
                                 print("stop")
                                 stopFirstTime = 0
 
@@ -155,8 +159,9 @@ def annotation():
                         turnRate = signum(turnRate) * settings["maxTurnRate"]
                     elif abs(turnRate) < 1:
                         turnRate = 0
+                    if stopping and time.time() - finalTime > 0.5:
+                        controlMode = False
                     if controlMode:
-                        robot.enable()
                         robot.drive_raw(-settings["speed"], turnRate)
                     else:
                         robot.stop()

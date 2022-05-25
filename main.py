@@ -129,7 +129,7 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    leftrighterror = 600
+                    leftrighterror = 400
                     print(abs(rightX - leftX))
                     if leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                         error -= img.shape[1] * 0.1
@@ -160,7 +160,7 @@ def annotation():
                         turnRate = 0
                     if controlMode:
                         if stopping:
-                            if time.time() - finalTime > 0.5:
+                            if time.time() - finalTime > 1:
                                 controlMode = False
                                 robot.stop()
                             robot.drive_raw(-settings["speed"], 0)

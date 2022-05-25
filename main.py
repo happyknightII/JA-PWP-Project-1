@@ -141,7 +141,7 @@ def annotation():
                     elif abs(rightX - leftX) < leftrighterror and leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                             if stopFirstTime == 0:
                                 stopFirstTime = time.time()
-                            elif time.time() - stopFirstTime < settings["offsetPixels"]:
+                            elif time.time() - stopFirstTime > settings["offsetPixels"]:
                                 controlMode = False
                                 stopFirstTime = 0
                             print("stop")

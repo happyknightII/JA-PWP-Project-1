@@ -159,10 +159,13 @@ def annotation():
                         turnRate = signum(turnRate) * settings["maxTurnRate"]
                     elif abs(turnRate) < 1:
                         turnRate = 0
-                    if stopping and time.time() - finalTime > 0.5:
-                        controlMode = False
                     if controlMode:
-                        robot.drive_raw(-settings["speed"], turnRate)
+                        if stopping:
+                            if time.time() - finalTime > 0.5:
+                                controlMode = False
+                                robot.drive_raw(-settings["speed"], 0)
+                        else:
+                            robot.drive_raw(-settings["speed"], turnRate)
                     else:
                         robot.stop()
 

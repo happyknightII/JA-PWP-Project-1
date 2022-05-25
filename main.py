@@ -138,15 +138,15 @@ def annotation():
                         error -= img.shape[1] * 0.9
                         stopFirstTime = 0
                         print("right turn")
-                    elif abs(rightX - leftX) < leftrighterror and leftX < img.shape[1] / 2 < rightX:
-                        if stopFirstTime == 0:
-                            stopFirstTime = time.time()
-                        elif time.time() - stopFirstTime > 0.5:
-                            controlMode = False
-                            print("stop")
-                            stopFirstTime = 0
-
                     else:
+                        if abs(rightX - leftX) < leftrighterror and leftX < img.shape[1] / 2 < rightX:
+                            if stopFirstTime == 0:
+                                stopFirstTime = time.time()
+                            elif time.time() - stopFirstTime > 0.5:
+                                controlMode = False
+                                print("stop")
+                                stopFirstTime = 0
+
                         stopFirstTime = 0
                         error -= img.shape[1] / 2
 

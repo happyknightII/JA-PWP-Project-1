@@ -126,7 +126,7 @@ def annotation():
 
                 if controlMode:
                     error = center
-                    leftrighterror = 600
+                    leftrighterror = 400
                     print(abs(rightX - leftX))
                     if leftX < img.shape[1] / 2 and rightX < img.shape[1] / 2:
                         error -= img.shape[1] * 0.1
@@ -141,7 +141,7 @@ def annotation():
                     elif abs(rightX - leftX) < leftrighterror and leftX < img.shape[1] / 2 < rightX:
                         if stopFirstTime == 0:
                             stopFirstTime = time.time()
-                        elif time.time() - stopFirstTime > 0.1:
+                        elif time.time() - stopFirstTime > 0.5:
                             controlMode = False
                             print("stop")
                             stopFirstTime = 0

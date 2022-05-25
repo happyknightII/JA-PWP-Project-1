@@ -145,7 +145,7 @@ def annotation():
                         if abs(rightX - leftX) < leftrighterror and leftX < img.shape[1] / 2 < rightX:
                             if stopFirstTime == 0:
                                 stopFirstTime = time.time()
-                            elif time.time() - stopFirstTime > 0.1:
+                            elif time.time() - stopFirstTime > 0.5:
                                 stopping = True
                                 finalTime = time.time()
                                 print("stop")
@@ -162,11 +162,10 @@ def annotation():
                         if stopping:
                             if time.time() - finalTime > 0.5:
                                 controlMode = False
+                                robot.stop()
                             robot.drive_raw(-settings["speed"], 0)
                         else:
                             robot.drive_raw(-settings["speed"], turnRate)
-                    else:
-                        robot.stop()
 
 
                 cv2.line(img, (0, 100), (img.shape[1], 100), (0, 0, 255))
